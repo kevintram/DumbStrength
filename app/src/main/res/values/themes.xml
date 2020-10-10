@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--Top level DayNight theme to be used in AndroidManifest.xml-->
+    <style name="Theme.SuperSimpleGymApp.DayNight" parent="Theme.SuperSimpleGymApp"/>
+    <!--Base custom theme which will be shared between both light and dark theme variants-->
+    <style name="Theme.SuperSimpleGymApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!--Material color attributes (light theme) -->
+        <item name="colorPrimary">@color/kiwicorp_dark_yellow_700</item>
+        <item name="colorPrimaryVariant">@color/kiwicorp_dark_yellow_700</item>
+        <item name="colorSecondary">@color/kiwicorp_green_400</item>
+        <item name="colorSecondaryVariant">@color/green_500</item>
+
+        <item name="android:colorBackground">@color/white_50</item>
+        <item name="colorSurface">@color/white_50</item>
+        <item name="colorError">@color/red_400</item>
+
+        <item name="colorOnPrimary">@color/white_50</item>
+        <item name="colorOnSecondary">@color/white_50</item>
+        <item name="colorOnBackground">@color/black_900</item>
+        <item name="colorOnSurface">@color/black_900</item>
+        <item name="colorOnError">@color/white_50</item>
+
+        <item name="isLightTheme">true</item>
+
+        <item name="android:statusBarColor">@color/white_50</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--Typography-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.SuperSimpleGymApp.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.SuperSimpleGymApp.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.SuperSimpleGymApp.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.SuperSimpleGymApp.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.SuperSimpleGymApp.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.SuperSimpleGymApp.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.SuperSimpleGymApp.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.SuperSimpleGymApp.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.SuperSimpleGymApp.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.SuperSimpleGymApp.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.SuperSimpleGymApp.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.SuperSimpleGymApp.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.SuperSimpleGymApp.Overline</item>
+        <!--Shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.SuperSimpleGymApp.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.SuperSimpleGymApp.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.SuperSimpleGymApp.LargeComponent</item>
+        <!--Component styles-->
+        <item name="buttonStyle">@style/Widget.MaterialComponents.Button</item>
+<!--        <item name="bottomAppBarStyle">@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface</item>-->
+<!--        <item name="materialAlertDialogTheme">@style/ThemeOverlay.DumbDue.AlertDialogTheme</item>-->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.SuperSimpleGymApp.BottomSheetDialog</item>
+<!--        <item name="materialTimePickerTheme">@style/ThemeOverlay.DumbDue.MaterialTimePicker</item>-->
+<!--        <item name="navigationViewStyle">@style/Widget.DumbDue.NavigationView</item>-->
+<!--        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>-->
+        <item name="imageButtonStyle">@style/Widget.SuperSimpleGymApp.Button.ImageButton</item>
+<!--        <item name="preferenceTheme">@style/DumbDue.PreferenceThemOverlay</item>-->
+    </style>
+</resources>

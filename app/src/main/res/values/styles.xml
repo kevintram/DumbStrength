@@ -1,10 +1,18 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!--Bottom Sheets-->
+    <style name="ThemeOverlay.SuperSimpleGymApp.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="bottomSheetStyle">@style/Widget.SuperSimpleGymApp.BottomSheet.Modal</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
+    <style name="Widget.SuperSimpleGymApp.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">?attr/shapeAppearanceLargeComponent</item>
+    </style>
+
+    <style name="Widget.SuperSimpleGymApp.Button.ImageButton" parent="@style/Widget.AppCompat.ImageButton">
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
 </resources>
