@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/workoutsFragment">
+
+    <fragment
+        android:id="@+id/activitiesFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragment"
+        android:label="ActivitiesFragment" />
+    <fragment
+        android:id="@+id/workoutsFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragment"
+        android:label="WorkoutsFragment" />
+    <action
+        android:id="@+id/toActivitiesFragment"
+        app:destination="@id/activitiesFragment" />
+    <action
+        android:id="@+id/toWorkoutsFragment"
+        app:destination="@id/workoutsFragment" />
+</navigation>

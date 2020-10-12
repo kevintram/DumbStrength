@@ -1,20 +1,6 @@
 <resources>
-    <string name="app_name">SimpleGymApp</string>
-    <string name="action_workouts">workouts</string>
-    <string name="action_exercises">exercises</string>
+    <string name="app_name">SuperSimpleGymApp</string>
+    <string name="workouts">workouts</string>
+    <string name="activities">activities</string>
 
-    <string name="exercise_name_hint">Name</string>
-    <string name="exercise_type_hint">Type</string>
-    <string name="action_edit">edit</string>
-    <string name="action_delete">delete</string>
-    <string name="add_exercise">Add Exercise</string>
-    <string name="finish">finish</string>
-    <string name="workouts">Workouts</string>
-    <string name="exercises">Exercises</string>
-    <string name="add_set">Add Set</string>
-    <string name="rep_count_hint">Rep Count</string>
-    <string name="type_hint">Type</string>
-    <string name="circuits">Circuits</string>
-    <string name="name">Name</string>
-    <string name="rounds">Rounds:</string>
 </resources>
