@@ -2,5 +2,8 @@
     <string name="app_name">SuperSimpleGymApp</string>
     <string name="workouts">workouts</string>
     <string name="activities">activities</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="add_description">Add Description</string>
 
 </resources>

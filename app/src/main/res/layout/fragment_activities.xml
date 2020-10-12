@@ -40,7 +40,7 @@
             android:src="@drawable/ic_add_on_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{()->viewModel.insert()}"/>
+            android:onClick="@{()->viewModel.navigateToAddActivityFragment()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

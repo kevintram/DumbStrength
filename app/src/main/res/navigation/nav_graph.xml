@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/activitiesFragment"
         android:name="com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragment"
-        android:label="ActivitiesFragment" />
+        android:label="ActivitiesFragment" >
+        <action
+            android:id="@+id/toAddEditActivityFragment"
+            app:destination="@id/addEditActivityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/workoutsFragment"
         android:name="com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragment"
@@ -17,4 +21,8 @@
     <action
         android:id="@+id/toWorkoutsFragment"
         app:destination="@id/workoutsFragment" />
+    <dialog
+        android:id="@+id/addEditActivityFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment"
+        android:label="AddEditActivityFragment" />
 </navigation>

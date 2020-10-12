@@ -6,6 +6,7 @@
         <variable
             name="activity"
             type="com.kiwicorp.supersimplegymapp.data.Activity" />
+
         <import type="android.view.View"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +27,8 @@
             android:id="@+id/description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginHorizontal="@dimen/margin_normal"
             android:textAppearance="?textAppearanceBody1"
             android:visibility="@{(activity.description != null)? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toBottomOf="@+id/name_text"
