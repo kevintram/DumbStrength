@@ -31,7 +31,7 @@ data class Entry(
     val workoutId: String,
 
     @ColumnInfo(name = "entry_description")
-    val description: String,
+    var description: String,
 
     @PrimaryKey @ColumnInfo(name = "entry_id")
     val id: String = UUID.randomUUID().toString()

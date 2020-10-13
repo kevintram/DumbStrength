@@ -16,8 +16,8 @@ data class WorkoutWithEntries (
     val description: String
         get() {
             var result = ""
-            for (entry in entries) {
-                result += "${entry.activity.name}\n"
+            for (entryWithActivity in entries) {
+                result += "${entryWithActivity.activity.name}\n\t${entryWithActivity.entry.description}\n"
             }
             return result
         }
