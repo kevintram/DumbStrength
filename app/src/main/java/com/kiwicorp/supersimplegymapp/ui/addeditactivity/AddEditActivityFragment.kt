@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentAddEditActivityBinding
 import com.kiwicorp.supersimplegymapp.util.RoundedBottomSheetDialogFragment
@@ -16,6 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddEditActivityFragment: RoundedBottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentAddEditActivityBinding
+
+    private val args: AddEditActivityFragmentArgs by navArgs()
 
     private val viewModel: AddEditActivityViewModel by viewModels()
 
@@ -33,6 +36,14 @@ class AddEditActivityFragment: RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.mode == Mode.EDIT) {
+            viewModel.loadActivity(args.activityId!!)
+            binding.doneButton.setOnClickListener { viewModel.update() }
+        } else {
+            binding.doneButton.setOnClickListener { viewModel.insert() }
+        }
+
         binding.nameText.requestFocus() // opens keyboard
     }
 
@@ -42,5 +53,10 @@ class AddEditActivityFragment: RoundedBottomSheetDialogFragment() {
             closeKeyboard()
             findNavController().navigateUp()
         })
+    }
+
+    enum class Mode {
+        ADD,
+        EDIT
     }
 }

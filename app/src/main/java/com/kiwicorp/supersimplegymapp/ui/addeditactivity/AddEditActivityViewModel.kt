@@ -14,7 +14,7 @@ class AddEditActivityViewModel @ViewModelInject constructor(
     private val activityRepository: ActivityRepository
 ): ViewModel() {
 
-    val activityId: String? = null
+    var activityId: String? = null
 
     val name = MutableLiveData("")
 
@@ -22,6 +22,15 @@ class AddEditActivityViewModel @ViewModelInject constructor(
 
     private val _close = MutableLiveData<Event<Unit>>()
     val close: LiveData<Event<Unit>> = _close
+
+    fun loadActivity(activityId: String) {
+        viewModelScope.launch {
+            val activity = activityRepository.getActivity(activityId)
+            this@AddEditActivityViewModel.activityId = activity.id
+            name.value = activity.name
+            description.value = activity.description
+        }
+    }
 
     fun insert() {
         viewModelScope.launch {
@@ -34,7 +43,8 @@ class AddEditActivityViewModel @ViewModelInject constructor(
     fun update() {
         viewModelScope.launch {
             val activity = Activity(name.value!!, description.value, activityId!!)
-            activityRepository
+            activityRepository.updateActivity(activity)
+            _close.value = Event(Unit)
         }
     }
 

@@ -10,6 +10,9 @@
         <action
             android:id="@+id/toAddEditActivityFragment"
             app:destination="@id/addEditActivityFragment" />
+        <action
+            android:id="@+id/toActivityDetailFragment"
+            app:destination="@id/activityDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutsFragment"
@@ -28,7 +31,15 @@
     <dialog
         android:id="@+id/addEditActivityFragment"
         android:name="com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment"
-        android:label="AddEditActivityFragment" />
+        android:label="AddEditActivityFragment" >
+        <argument
+            android:name="mode"
+            app:argType="com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment$Mode" />
+        <argument
+            android:name="activityId"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
     <navigation android:id="@+id/addEditWorkoutGraph"
         app:startDestination="@id/addEditWorkoutFragment">
         <fragment
@@ -44,4 +55,15 @@
             android:name="com.kiwicorp.supersimplegymapp.ui.addeditworkout.ChooseActivityFragment"
             android:label="ChooseActivityFragment" />
     </navigation>
+    <fragment
+        android:id="@+id/activityDetailFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.activitydetail.ActivityDetailFragment"
+        android:label="ActivityDetailFragment" >
+        <argument
+            android:name="activityId"
+            app:argType="string" />
+        <action
+            android:id="@+id/toAddEditActivityFragment"
+            app:destination="@id/addEditActivityFragment" />
+    </fragment>
 </navigation>

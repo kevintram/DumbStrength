@@ -1,7 +1,9 @@
 package com.kiwicorp.supersimplegymapp.data.source
 
+import androidx.lifecycle.LiveData
 import com.kiwicorp.supersimplegymapp.data.Workout
 import com.kiwicorp.supersimplegymapp.data.Entry
+import com.kiwicorp.supersimplegymapp.data.EntryWithActivity
 import com.kiwicorp.supersimplegymapp.data.source.local.EntryDao
 import com.kiwicorp.supersimplegymapp.data.source.local.WorkoutDao
 import kotlinx.coroutines.Dispatchers
@@ -24,5 +26,9 @@ class WorkoutRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             entryDao.insertEntry(entry)
         }
+    }
+
+    fun observeEntriesByActivityId(activityId: String): LiveData<List<Entry>> {
+        return entryDao.observeEntriesByActivityId(activityId)
     }
 }

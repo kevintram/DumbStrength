@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.supersimplegymapp.data.EntryWithActivity
 import com.kiwicorp.supersimplegymapp.databinding.ItemEntryBinding
 
-class EntryListAdapter(private val viewModel: AddEditWorkoutViewModel):
-    ListAdapter<EntryWithActivity,EntryListAdapter.EntryViewHolder>(EntryDiffCallback()) {
+class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
+    ListAdapter<EntryWithActivity,EntryWithActivityListAdapter.EntryWithActivityViewHolder>(EntryWithActivityDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
-        return EntryViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryWithActivityViewHolder {
+        return EntryWithActivityViewHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EntryWithActivityViewHolder, position: Int) {
         holder.bind(getItem(position),viewModel)
     }
 
-    class EntryViewHolder(private val binding: ItemEntryBinding): RecyclerView.ViewHolder(binding.root) {
+    class EntryWithActivityViewHolder(private val binding: ItemEntryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(entryWithActivity: EntryWithActivity, viewModel: AddEditWorkoutViewModel) {
             binding.entryWithActivity = entryWithActivity
             binding.viewModel = viewModel
@@ -30,16 +30,16 @@ class EntryListAdapter(private val viewModel: AddEditWorkoutViewModel):
         }
 
         companion object {
-            fun from(parent: ViewGroup): EntryViewHolder {
+            fun from(parent: ViewGroup): EntryWithActivityViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemEntryBinding.inflate(layoutInflater, parent, false)
 
-                return EntryViewHolder(binding)
+                return EntryWithActivityViewHolder(binding)
             }
         }
     }
 
-    class EntryDiffCallback: DiffUtil.ItemCallback<EntryWithActivity>() {
+    class EntryWithActivityDiffCallback: DiffUtil.ItemCallback<EntryWithActivity>() {
         override fun areItemsTheSame(
             oldItem: EntryWithActivity,
             newItem: EntryWithActivity

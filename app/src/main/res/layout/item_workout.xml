@@ -19,7 +19,7 @@
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{workoutWithWorkoutComponents.workout.dateStr}"
-            tools:text="Fri, May 29, 10:05 AM" />
+            tools:text="Fri, May 29" />
 
         <TextView
             android:id="@+id/description_text"

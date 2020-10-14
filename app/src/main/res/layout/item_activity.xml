@@ -7,11 +7,16 @@
             name="activity"
             type="com.kiwicorp.supersimplegymapp.data.Activity" />
 
+        <variable
+            name="viewModel"
+            type="com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesViewModel" />
+
         <import type="android.view.View"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()->viewModel.navigateToActivityDetail(activity.id)}">
 
         <TextView
             android:id="@+id/name_text"

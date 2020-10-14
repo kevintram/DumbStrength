@@ -23,6 +23,7 @@ class ActivitiesListAdapter(private val viewModel: ActivitiesViewModel):
     class ActivityViewHolder(private val binding: ItemActivityBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(activity: Activity, viewModel: ActivitiesViewModel) {
             binding.activity = activity
+            binding.viewModel = viewModel
         }
 
         companion object {

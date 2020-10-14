@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentAddEditWorkoutBinding
+import com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragmentArgs
 import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toChooseActivityFragment
 import com.kiwicorp.supersimplegymapp.ui.addeditworkout.ChooseActivityFragmentDirections.Companion.toWorkoutsFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +27,7 @@ class AddEditWorkoutFragment: Fragment() {
         defaultViewModelProviderFactory
     }
 
-    private lateinit var adapter: EntryListAdapter
+    private lateinit var adapter: EntryWithActivityListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +53,7 @@ class AddEditWorkoutFragment: Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = EntryListAdapter(viewModel)
+        adapter = EntryWithActivityListAdapter(viewModel)
         binding.entriesRecyclerView.adapter = adapter
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

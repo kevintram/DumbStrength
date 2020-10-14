@@ -10,12 +10,13 @@ import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
 import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.ZonedDateTime
 import java.util.*
 
 class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val workoutRepository: WorkoutRepository,
-    private val activityRepository: ActivityRepository
+    activityRepository: ActivityRepository
 ): ViewModel() {
     //initialize workout id here it can be used for entries
     private val workoutId = UUID.randomUUID().toString()
@@ -32,7 +33,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     val close: LiveData<Event<Unit>> = _close
 
     fun chooseActivity(activity: Activity) {
-        val entry = Entry(activity.id,workoutId,"")
+        val entry = Entry(activity.id,workoutId,"", LocalDate.now())
         val entryWithActivity = EntryWithActivity(entry, activity)
         _entries.value = _entries.value!!.plusElement(entryWithActivity)
     }
@@ -46,7 +47,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
 
     fun insertWorkoutAndClose() {
         viewModelScope.launch {
-            val workout = Workout(ZonedDateTime.now(),workoutId)
+            val workout = Workout(LocalDate.now(),workoutId)
             workoutRepository.insertWorkout(workout)
 
             for (entryWithActivity in entries.value!!) {

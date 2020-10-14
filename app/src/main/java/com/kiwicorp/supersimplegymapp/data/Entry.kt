@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.time.LocalDate
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Entity(
@@ -33,6 +36,15 @@ data class Entry(
     @ColumnInfo(name = "entry_description")
     var description: String,
 
+    @ColumnInfo(name = "entry_date")
+    var date: LocalDate,
+
     @PrimaryKey @ColumnInfo(name = "entry_id")
     val id: String = UUID.randomUUID().toString()
-)
+) {
+    val dateStr: String
+        get() {
+            val dateFormatter = DateTimeFormatter.ofPattern("EEE, d MMM")
+            return dateFormatter.format(date)
+        }
+}

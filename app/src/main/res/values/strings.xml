@@ -5,5 +5,7 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="add_description">Add Description</string>
+    <string name="menu_item_edit_activity">Edit Activity</string>
+    <string name="history">History</string>
 
 </resources>
