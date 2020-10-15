@@ -39,9 +39,9 @@ class AddEditActivityFragment: RoundedBottomSheetDialogFragment() {
 
         if (args.mode == Mode.EDIT) {
             viewModel.loadActivity(args.activityId!!)
-            binding.doneButton.setOnClickListener { viewModel.update() }
+            binding.doneButton.setOnClickListener { viewModel.updateWorkoutAndClose() }
         } else {
-            binding.doneButton.setOnClickListener { viewModel.insert() }
+            binding.doneButton.setOnClickListener { viewModel.insertWorkoutAndClose() }
         }
 
         binding.nameText.requestFocus() // opens keyboard

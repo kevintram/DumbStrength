@@ -32,23 +32,27 @@ class AddEditActivityViewModel @ViewModelInject constructor(
         }
     }
 
-    fun insert() {
+    fun insertWorkoutAndClose() {
         viewModelScope.launch {
             val activity = Activity(name.value!!, description.value)
             activityRepository.insertActivity(activity)
-            _close.value = Event(Unit)
+            close()
         }
     }
 
-    fun update() {
+    fun updateWorkoutAndClose() {
         viewModelScope.launch {
             val activity = Activity(name.value!!, description.value, activityId!!)
             activityRepository.updateActivity(activity)
-            _close.value = Event(Unit)
+            close()
         }
     }
 
     fun addDescription() {
         description.value = ""
+    }
+
+    fun close() {
+        _close.value = Event(Unit)
     }
 }

@@ -33,7 +33,7 @@ class ActivityDetailViewModel @ViewModelInject constructor(
         }
     }
     
-    fun deleteActivity() {
+    fun deleteWorkoutAndClose() {
         viewModelScope.launch {
             activityRepository.deleteActivity(activity.value!!)
             close()

@@ -65,7 +65,7 @@ class ActivityDetailFragment: Fragment() {
                     true
                 }
                 R.id.menu_item_delete_activity -> {
-                    viewModel.deleteActivity()
+                    viewModel.deleteWorkoutAndClose()
                     true
                 }
                 else -> false
