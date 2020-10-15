@@ -47,9 +47,7 @@ class ActivityDetailFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.navigateToEditActivityFragment.observe(viewLifecycleOwner, EventObserver {activityId ->
-            findNavController().navigate(toAddEditActivityFragment(AddEditActivityFragment.Mode.EDIT,activityId))
-        })
+        setupNavigation()
     }
 
     private fun setupRecyclerView() {
@@ -61,14 +59,26 @@ class ActivityDetailFragment: Fragment() {
 
     private fun setupToolbar() {
         binding.toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.menu_item_edit_activity) {
-                viewModel.navigateToEditActivityFragment()
-                true
-            } else {
-                false
+            when(it.itemId) {
+                R.id.menu_item_edit_activity -> {
+                    viewModel.navigateToEditActivityFragment()
+                    true
+                }
+                R.id.menu_item_delete_activity -> {
+                    viewModel.deleteActivity()
+                    true
+                }
+                else -> false
             }
         }
         binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+    }
+
+    private fun setupNavigation() {
+        viewModel.navigateToEditActivityFragment.observe(viewLifecycleOwner, EventObserver {activityId ->
+            findNavController().navigate(toAddEditActivityFragment(AddEditActivityFragment.Mode.EDIT,activityId))
+        })
+        viewModel.close.observe(viewLifecycleOwner, EventObserver { findNavController().navigateUp() })
     }
 
 }
