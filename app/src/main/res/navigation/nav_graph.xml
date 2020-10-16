@@ -42,6 +42,13 @@
     </dialog>
     <navigation android:id="@+id/addEditWorkoutGraph"
         app:startDestination="@id/addEditWorkoutFragment">
+        <argument
+            android:name="mode"
+            app:argType="com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment$Mode" />
+        <argument
+            android:name="workoutId"
+            app:argType="string"
+            app:nullable="true" />
         <fragment
             android:id="@+id/addEditWorkoutFragment"
             android:name="com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment"
@@ -49,6 +56,13 @@
             <action
                 android:id="@+id/toChooseActivityFragment"
                 app:destination="@id/chooseActivityFragment" />
+            <argument
+                android:name="mode"
+                app:argType="com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment$Mode" />
+            <argument
+                android:name="workoutId"
+                app:argType="string"
+                app:nullable="true"/>
         </fragment>
         <fragment
             android:id="@+id/chooseActivityFragment"

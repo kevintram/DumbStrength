@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentWorkoutsBinding
+import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment
 import com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragmentDirections.Companion.toAddEditWorkoutGraph
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,8 +42,11 @@ class WorkoutsFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.navigateToAddEditWorkoutFragment.observe(viewLifecycleOwner, Observer {
-            findNavController().navigate(toAddEditWorkoutGraph())
+        viewModel.navigateToAddWorkoutFragment.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(toAddEditWorkoutGraph(AddEditWorkoutFragment.Mode.ADD,null))
+        })
+        viewModel.navigateToEditWorkoutFragment.observe(viewLifecycleOwner, EventObserver { workoutId ->
+            findNavController().navigate(toAddEditWorkoutGraph(AddEditWorkoutFragment.Mode.EDIT,workoutId))
         })
     }
 

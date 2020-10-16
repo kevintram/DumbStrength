@@ -18,9 +18,16 @@ class WorkoutsViewModel @ViewModelInject constructor(
     val workouts = workoutRepository.workouts
 
     private val _navigateToAddWorkoutFragment = MutableLiveData<Event<Unit>>()
-    val navigateToAddEditWorkoutFragment: LiveData<Event<Unit>> = _navigateToAddWorkoutFragment
+    val navigateToAddWorkoutFragment: LiveData<Event<Unit>> = _navigateToAddWorkoutFragment
+
+    private val _navigateToEditWorkoutFragment = MutableLiveData<Event<String>>()
+    val navigateToEditWorkoutFragment: LiveData<Event<String>> = _navigateToEditWorkoutFragment
 
     fun navigateToAddWorkoutFragment() {
         _navigateToAddWorkoutFragment.value = Event(Unit)
+    }
+
+    fun navigateToEditWorkoutFragment(workoutId: String) {
+        _navigateToEditWorkoutFragment.value = Event(workoutId)
     }
 }

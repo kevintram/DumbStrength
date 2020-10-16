@@ -24,7 +24,8 @@ class WorkoutsListAdapter(private val viewModel: WorkoutsViewModel):
 
     class WorkoutWithWorkoutComponentsViewHolder(private val binding: ItemWorkoutBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(workoutWithEntries: WorkoutWithEntries, viewModel: WorkoutsViewModel) {
-            binding.workoutWithWorkoutComponents = workoutWithEntries
+            binding.workoutWithEntries = workoutWithEntries
+            binding.viewModel = viewModel
         }
 
         companion object {

@@ -22,8 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.Toolbar.Surface"
-                app:navigationIcon="@drawable/ic_arrow_back"
-                app:title="Add Workout" />
+                app:navigationIcon="@drawable/ic_arrow_back" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

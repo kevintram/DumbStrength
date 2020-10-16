@@ -19,7 +19,10 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     activityRepository: ActivityRepository
 ): ViewModel() {
     //initialize workout id here it can be used for entries
-    private val workoutId = UUID.randomUUID().toString()
+    private var workoutId = UUID.randomUUID().toString()
+
+    private val _date = MutableLiveData(LocalDate.now())
+    val date: LiveData<LocalDate> = _date
 
     private val _entries = MutableLiveData(listOf<EntryWithActivity>())
     val entries: LiveData<List<EntryWithActivity>> = _entries
@@ -32,22 +35,23 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val _close = MutableLiveData<Event<Unit>>()
     val close: LiveData<Event<Unit>> = _close
 
-    fun chooseActivity(activity: Activity) {
-        val entry = Entry(activity.id,workoutId,"", LocalDate.now())
-        val entryWithActivity = EntryWithActivity(entry, activity)
-        _entries.value = _entries.value!!.plusElement(entryWithActivity)
-    }
-
-    fun unchooseActivity(activity: Activity) {
-        _entries.value = _entries.value!!.filter {
-            it.activity.id != activity.id
+    fun loadWorkout(workoutId: String) {
+        // stop if workout already loaded (needed because all changes will be undone when navigating
+        // from ChooseActivityFragment to AddEditWorkoutFragment)
+        if (workoutId == this.workoutId) {
+            return
         }
-        println()
+        viewModelScope.launch {
+            val workoutWithEntries = workoutRepository.getWorkout(workoutId)
+            this@AddEditWorkoutViewModel.workoutId = workoutId
+            _date.value = workoutWithEntries.workout.date
+            _entries.value = workoutWithEntries.entries
+        }
     }
 
     fun insertWorkoutAndClose() {
         viewModelScope.launch {
-            val workout = Workout(LocalDate.now(),workoutId)
+            val workout = Workout(date.value!!,workoutId)
             workoutRepository.insertWorkout(workout)
 
             for (entryWithActivity in entries.value!!) {
@@ -55,6 +59,59 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             }
 
             close()
+        }
+    }
+
+    fun deleteWorkoutAndClose() {
+        viewModelScope.launch {
+            val workout = Workout(date.value!!, workoutId)
+            workoutRepository.deleteWorkout(workout)
+            // entries don't need to be deleted here because workout is a foreign key in Entry
+            close()
+        }
+    }
+
+    fun updateWorkoutAndClose() {
+        viewModelScope.launch {
+            val workout = Workout(date.value!!, workoutId)
+            workoutRepository.updateWorkout(workout)
+
+            val prevEntries = workoutRepository.getEntriesByWorkoutId(workoutId)
+
+            val entriesToDelete = prevEntries.dropWhile {
+                // drop if this entry is in entries
+                for (entryWithActivity in entries.value!!) {
+                    if (entryWithActivity.entry.id == it.id) {
+                        return@dropWhile true
+                    }
+                }
+                return@dropWhile false
+            }
+
+            for (entry in entriesToDelete) {
+                workoutRepository.deleteEntry(entry)
+            }
+
+            for (entryWithActivity in entries.value!!) {
+                // don't use update, use insert because onConflict = Replace. So if already exists
+                // will be updated; if doesn't exist will be inserted.
+                workoutRepository.insertEntry(entryWithActivity.entry)
+            }
+
+            close()
+        }
+    }
+
+    fun chooseActivity(activity: Activity) {
+        val entry = Entry(activity.id,workoutId,"", date.value!!)
+        val entryWithActivity = EntryWithActivity(entry, activity)
+        _entries.value = _entries.value!!.plusElement(entryWithActivity)
+    }
+
+    fun unchooseActivity(activity: Activity) {
+        // drop entries with the same activity (for some reason dropWhile() will not work)
+        _entries.value = _entries.value!!.filter {
+            it.activity.id != activity.id
         }
     }
 

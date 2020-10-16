@@ -8,5 +8,6 @@
     <string name="menu_item_edit_activity">Edit Activity</string>
     <string name="history">History</string>
     <string name="menu_item_delete_activity">Delete Activity</string>
+    <string name="menu_item_delete_workout">Delete Workout</string>
 
 </resources>

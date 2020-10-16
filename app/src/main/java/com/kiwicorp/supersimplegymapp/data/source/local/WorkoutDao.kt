@@ -1,10 +1,7 @@
 package com.kiwicorp.supersimplegymapp.data.source.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.kiwicorp.supersimplegymapp.data.Workout
 import com.kiwicorp.supersimplegymapp.data.WorkoutWithEntries
 
@@ -18,6 +15,16 @@ interface WorkoutDao {
     @Query("SELECT * FROM workouts")
     suspend fun getWorkouts(): List<WorkoutWithEntries>
 
+    @Transaction
+    @Query("SELECT * FROM workouts WHERE workout_id = :workoutId")
+    suspend fun getWorkout(workoutId: String): WorkoutWithEntries
+
     @Insert
     suspend fun insertWorkout(workout: Workout)
+
+    @Update
+    suspend fun updateWorkout(workout: Workout): Int
+
+    @Delete
+    suspend fun deleteWorkout(workout: Workout): Int
 }

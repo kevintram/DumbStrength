@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="workoutWithWorkoutComponents"
+            name="workoutWithEntries"
             type="com.kiwicorp.supersimplegymapp.data.WorkoutWithEntries" />
+
+        <variable
+            name="viewModel"
+            type="com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()->viewModel.navigateToEditWorkoutFragment(workoutWithEntries.workout.id)}">
 
         <TextView
             android:id="@+id/date_text"
@@ -18,7 +23,7 @@
             android:layout_margin="@dimen/margin_normal"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{workoutWithWorkoutComponents.workout.dateStr}"
+            android:text="@{workoutWithEntries.workout.dateStr}"
             tools:text="Fri, May 29" />
 
         <TextView
@@ -28,7 +33,7 @@
             android:layout_margin="@dimen/margin_normal"
             android:textAppearance="?textAppearanceBody1"
             app:layout_constraintTop_toBottomOf="@id/date_text"
-            android:text="@{workoutWithWorkoutComponents.description}"
+            android:text="@{workoutWithEntries.description}"
             tools:text="Description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

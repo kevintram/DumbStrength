@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.kiwicorp.supersimplegymapp.data.Workout
 import com.kiwicorp.supersimplegymapp.data.Entry
 import com.kiwicorp.supersimplegymapp.data.EntryWithActivity
+import com.kiwicorp.supersimplegymapp.data.WorkoutWithEntries
 import com.kiwicorp.supersimplegymapp.data.source.local.EntryDao
 import com.kiwicorp.supersimplegymapp.data.source.local.WorkoutDao
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +17,27 @@ class WorkoutRepository @Inject constructor(
 ) {
     val workouts = workoutDao.observerWorkouts()
 
+    suspend fun getWorkout(workoutId: String): WorkoutWithEntries {
+        return withContext(Dispatchers.IO) {
+            workoutDao.getWorkout(workoutId)
+        }
+    }
+
     suspend fun insertWorkout(workout: Workout) {
         withContext(Dispatchers.IO) {
             workoutDao.insertWorkout(workout)
+        }
+    }
+
+    suspend fun updateWorkout(workout: Workout): Int {
+        return withContext(Dispatchers.IO) {
+            workoutDao.updateWorkout(workout)
+        }
+    }
+
+    suspend fun deleteWorkout(workout: Workout): Int {
+        return withContext(Dispatchers.IO) {
+            workoutDao.deleteWorkout(workout)
         }
     }
 
@@ -28,7 +47,25 @@ class WorkoutRepository @Inject constructor(
         }
     }
 
+    suspend fun updateEntry(entry: Entry): Int {
+        return withContext(Dispatchers.IO) {
+            entryDao.updateEntry(entry)
+        }
+    }
+
+    suspend fun deleteEntry(entry: Entry): Int {
+        return withContext(Dispatchers.IO) {
+            entryDao.deleteEntry(entry)
+        }
+    }
+
     fun observeEntriesByActivityId(activityId: String): LiveData<List<Entry>> {
         return entryDao.observeEntriesByActivityId(activityId)
+    }
+
+    suspend fun getEntriesByWorkoutId(workoutId: String): List<Entry> {
+        return withContext(Dispatchers.IO) {
+            entryDao.getEntriesByWorkoutId(workoutId)
+        }
     }
 }
