@@ -14,6 +14,7 @@ import com.kiwicorp.supersimplegymapp.NavGraphDirections.Companion.toWorkoutsFra
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentAddEditWorkoutBinding
 import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toChooseActivityFragment
+import com.kiwicorp.supersimplegymapp.util.Mode
 import com.kiwicorp.supersimplegymapp.util.closeKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -93,10 +94,5 @@ class AddEditWorkoutFragment: Fragment() {
             closeKeyboard()
             findNavController().navigate(toWorkoutsFragment())
         })
-    }
-
-    enum class Mode {
-        ADD,
-        EDIT
     }
 }

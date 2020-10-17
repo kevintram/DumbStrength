@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentAddEditActivityBinding
+import com.kiwicorp.supersimplegymapp.util.Mode
 import com.kiwicorp.supersimplegymapp.util.RoundedBottomSheetDialogFragment
 import com.kiwicorp.supersimplegymapp.util.closeKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,10 +54,5 @@ class AddEditActivityFragment: RoundedBottomSheetDialogFragment() {
             closeKeyboard()
             findNavController().navigateUp()
         })
-    }
-
-    enum class Mode {
-        ADD,
-        EDIT
     }
 }

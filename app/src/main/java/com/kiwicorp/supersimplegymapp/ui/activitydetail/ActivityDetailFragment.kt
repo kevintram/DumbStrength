@@ -14,6 +14,7 @@ import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentActivityDetailBinding
 import com.kiwicorp.supersimplegymapp.ui.activitydetail.ActivityDetailFragmentDirections.Companion.toAddEditActivityFragment
 import com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment
+import com.kiwicorp.supersimplegymapp.util.Mode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -76,7 +77,7 @@ class ActivityDetailFragment: Fragment() {
 
     private fun setupNavigation() {
         viewModel.navigateToEditActivityFragment.observe(viewLifecycleOwner, EventObserver {activityId ->
-            findNavController().navigate(toAddEditActivityFragment(AddEditActivityFragment.Mode.EDIT,activityId))
+            findNavController().navigate(toAddEditActivityFragment(Mode.EDIT,activityId))
         })
         viewModel.close.observe(viewLifecycleOwner, EventObserver { findNavController().navigateUp() })
     }

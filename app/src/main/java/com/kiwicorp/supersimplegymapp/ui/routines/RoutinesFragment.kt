@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentRoutinesBinding
 import com.kiwicorp.supersimplegymapp.ui.routines.RoutinesFragmentDirections.Companion.toAddEditRoutineGraph
+import com.kiwicorp.supersimplegymapp.util.Mode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +42,7 @@ class RoutinesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.navigateToAddActivityFragment.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(toAddEditRoutineGraph())
+            findNavController().navigate(toAddEditRoutineGraph(Mode.ADD, null))
         })
     }
 
