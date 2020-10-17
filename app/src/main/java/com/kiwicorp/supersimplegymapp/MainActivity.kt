@@ -6,6 +6,7 @@ import android.view.View
 import androidx.navigation.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.kiwicorp.supersimplegymapp.NavGraphDirections.Companion.toActivitiesFragment
+import com.kiwicorp.supersimplegymapp.NavGraphDirections.Companion.toRoutinesFragment
 import com.kiwicorp.supersimplegymapp.NavGraphDirections.Companion.toWorkoutsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 when (tab!!.position) {
                     0 -> navController.navigate(toWorkoutsFragment())
                     1 -> navController.navigate(toActivitiesFragment())
+                    2 -> navController.navigate(toRoutinesFragment())
                 }
             }
 
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             tabLayout.visibility = when(destination.id) {
                 R.id.workoutsFragment -> View.VISIBLE
                 R.id.activitiesFragment -> View.VISIBLE
+                R.id.routinesFragment -> View.VISIBLE
                 else -> View.GONE
             }
         }

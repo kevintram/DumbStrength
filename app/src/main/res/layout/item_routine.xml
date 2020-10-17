@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="routineWithEntries"
+            type="com.kiwicorp.supersimplegymapp.data.RoutineWithEntries" />
+        <variable
+            name="viewModel"
+            type="com.kiwicorp.supersimplegymapp.ui.routines.RoutinesViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/routine_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{routineWithEntries.routine.name}"
+            tools:text="Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

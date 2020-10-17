@@ -80,4 +80,11 @@
             android:id="@+id/toAddEditActivityFragment"
             app:destination="@id/addEditActivityFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/routinesFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.routines.RoutinesFragment"
+        android:label="RoutinesFragment" />
+    <action
+        android:id="@+id/toRoutinesFragment"
+        app:destination="@id/routinesFragment" />
 </navigation>
