@@ -12,10 +12,17 @@ class RoutinesViewModel @ViewModelInject constructor(
 ): ViewModel() {
     val routines = routineRepository.routines
 
-    private val _navigateToAddActivityFragment = MutableLiveData<Event<Unit>>()
-    val navigateToAddActivityFragment: LiveData<Event<Unit>> = _navigateToAddActivityFragment
+    private val _navigateToAddRoutineFragment = MutableLiveData<Event<Unit>>()
+    val navigateToAddRoutineFragment: LiveData<Event<Unit>> = _navigateToAddRoutineFragment
 
-    fun navigateToAddActivity() {
-        _navigateToAddActivityFragment.value = Event(Unit)
+    private val _navigateToEditRoutineFragment = MutableLiveData<Event<String>>()
+    val navigateToEditRoutineFragment: LiveData<Event<String>> = _navigateToEditRoutineFragment
+
+    fun navigateToAddRoutineFragment() {
+        _navigateToAddRoutineFragment.value = Event(Unit)
+    }
+
+    fun navigateToEditRoutineFragment(routineId: String) {
+        _navigateToEditRoutineFragment.value = Event(routineId)
     }
 }

@@ -22,6 +22,7 @@
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{routineWithEntries.routine.name}"
+            android:onClick="@{()->viewModel.navigateToEditRoutineFragment(routineWithEntries.routine.id)}"
             tools:text="Name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

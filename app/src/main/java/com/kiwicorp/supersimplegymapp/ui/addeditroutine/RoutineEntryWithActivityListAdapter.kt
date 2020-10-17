@@ -2,6 +2,7 @@ package com.kiwicorp.supersimplegymapp.ui.addeditroutine
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,9 @@ class RoutineEntryWithActivityListAdapter(private val viewModel: AddEditRoutineV
     class RoutineEntryWithActivityViewHolder(private val binding: ItemRoutineEntryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(routineEntryWithActivity: RoutineEntryWithActivity, viewModel: AddEditRoutineViewModel) {
             binding.entryWithActivity = routineEntryWithActivity
+            binding.entryDescriptionText.doOnTextChanged { text, _, _, _ ->
+                routineEntryWithActivity.routineEntry.description = text.toString()
+            }
             binding.viewModel = viewModel
         }
 

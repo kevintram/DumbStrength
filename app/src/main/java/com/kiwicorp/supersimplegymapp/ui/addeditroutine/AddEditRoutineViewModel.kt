@@ -38,6 +38,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
         }
         viewModelScope.launch {
             val routineWithEntries = routineRepository.getRoutineWithEntriesById(routineId)
+            name.value = routineWithEntries.routine.name
             this@AddEditRoutineViewModel.routineId = routineId
             _entries.value = routineWithEntries.entries
         }

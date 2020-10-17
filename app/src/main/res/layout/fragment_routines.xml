@@ -41,7 +41,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_add_on_primary"
-            android:onClick="@{()->viewModel.navigateToAddActivity()}"/>
+            android:onClick="@{()->viewModel.navigateToAddRoutineFragment()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

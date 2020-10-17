@@ -10,5 +10,6 @@
     <string name="menu_item_delete_activity">Delete Activity</string>
     <string name="menu_item_delete_workout">Delete Workout</string>
     <string name="routines">Routines</string>
+    <string name="menu_item_delete_routine">Delete Routine</string>
 
 </resources>

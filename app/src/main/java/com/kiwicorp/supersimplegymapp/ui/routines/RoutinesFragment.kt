@@ -41,9 +41,7 @@ class RoutinesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.navigateToAddActivityFragment.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(toAddEditRoutineGraph(Mode.ADD, null))
-        })
+        setupNavigation()
     }
 
     private fun setupRecyclerView() {
@@ -51,6 +49,15 @@ class RoutinesFragment : Fragment() {
         binding.routineRecyclerView.adapter = adapter
         viewModel.routines.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+        })
+    }
+
+    private fun setupNavigation() {
+        viewModel.navigateToAddRoutineFragment.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(toAddEditRoutineGraph(Mode.ADD, null))
+        })
+        viewModel.navigateToEditRoutineFragment.observe(viewLifecycleOwner, EventObserver {routineId ->
+            findNavController().navigate(toAddEditRoutineGraph(Mode.EDIT, routineId))
         })
     }
 }

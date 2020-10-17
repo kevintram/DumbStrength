@@ -31,7 +31,7 @@ data class RoutineEntry(
     val routineId: String,
 
     @ColumnInfo(name = "routine_entry_description")
-    val description: String,
+    var description: String,
 
     @PrimaryKey @ColumnInfo(name = "routine_entry_id")
     val id: String = UUID.randomUUID().toString()

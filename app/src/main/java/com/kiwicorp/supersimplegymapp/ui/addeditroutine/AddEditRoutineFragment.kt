@@ -65,11 +65,11 @@ class AddEditRoutineFragment : Fragment() {
         if (args.mode == Mode.EDIT) {
             viewModel.loadRoutine(args.routineId!!)
 
-            binding.toolbar.title = "Edit Workout"
-            binding.toolbar.inflateMenu(R.menu.edit_workout_menu)
+            binding.toolbar.title = "Edit Routine"
+            binding.toolbar.inflateMenu(R.menu.edit_routine_menu)
             binding.toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.menu_item_delete_workout -> {
+                    R.id.menu_item_delete_routine-> {
                         viewModel.deleteRoutineAndClose()
                         true
                     }
@@ -78,7 +78,7 @@ class AddEditRoutineFragment : Fragment() {
             }
             binding.toolbar.setNavigationOnClickListener { viewModel.updateRoutineAndClose() }
         } else {
-            binding.toolbar.title = "Add Workout"
+            binding.toolbar.title = "Add Routine"
             binding.toolbar.setNavigationOnClickListener { viewModel.insertRoutineAndClose() }
         }
     }
@@ -89,6 +89,7 @@ class AddEditRoutineFragment : Fragment() {
             findNavController().navigate(toRoutinesFragment())
         })
         viewModel.navigateToChooseActivityFragment.observe(viewLifecycleOwner, EventObserver {
+            closeKeyboard()
             findNavController().navigate(toChooseActivityFragment())
         })
     }
