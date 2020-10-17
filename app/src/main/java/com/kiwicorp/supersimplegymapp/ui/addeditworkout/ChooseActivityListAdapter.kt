@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.supersimplegymapp.data.Activity
-import com.kiwicorp.supersimplegymapp.data.EntryWithActivity
+import com.kiwicorp.supersimplegymapp.data.WorkoutEntryWithActivity
 import com.kiwicorp.supersimplegymapp.databinding.ItemCheckableActivityBinding
 
 class ChooseActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
@@ -40,8 +40,8 @@ class ChooseActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
 
         }
 
-        private fun activityIsInEntries(activity: Activity, entriesWithActivity: List<EntryWithActivity>): Boolean {
-            for (entryWithActivity in entriesWithActivity) {
+        private fun activityIsInEntries(activity: Activity, entriesWithActivityWorkout: List<WorkoutEntryWithActivity>): Boolean {
+            for (entryWithActivity in entriesWithActivityWorkout) {
                 if (entryWithActivity.activity == activity) {
                     return true
                 }

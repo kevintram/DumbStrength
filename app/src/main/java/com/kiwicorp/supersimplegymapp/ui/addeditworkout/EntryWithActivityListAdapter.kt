@@ -6,11 +6,11 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kiwicorp.supersimplegymapp.data.EntryWithActivity
+import com.kiwicorp.supersimplegymapp.data.WorkoutEntryWithActivity
 import com.kiwicorp.supersimplegymapp.databinding.ItemEntryBinding
 
 class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
-    ListAdapter<EntryWithActivity,EntryWithActivityListAdapter.EntryWithActivityViewHolder>(EntryWithActivityDiffCallback()) {
+    ListAdapter<WorkoutEntryWithActivity,EntryWithActivityListAdapter.EntryWithActivityViewHolder>(EntryWithActivityDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryWithActivityViewHolder {
         return EntryWithActivityViewHolder.from(parent)
@@ -21,11 +21,11 @@ class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewMode
     }
 
     class EntryWithActivityViewHolder(private val binding: ItemEntryBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(entryWithActivity: EntryWithActivity, viewModel: AddEditWorkoutViewModel) {
-            binding.entryWithActivity = entryWithActivity
+        fun bind(workoutEntryWithActivity: WorkoutEntryWithActivity, viewModel: AddEditWorkoutViewModel) {
+            binding.entryWithActivity = workoutEntryWithActivity
             binding.viewModel = viewModel
             binding.entryDescriptionText.doOnTextChanged { text, _, _, _ ->
-                entryWithActivity.entry.description = text.toString()
+                workoutEntryWithActivity.workoutEntry.description = text.toString()
             }
         }
 
@@ -39,17 +39,17 @@ class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewMode
         }
     }
 
-    class EntryWithActivityDiffCallback: DiffUtil.ItemCallback<EntryWithActivity>() {
+    class EntryWithActivityDiffCallback: DiffUtil.ItemCallback<WorkoutEntryWithActivity>() {
         override fun areItemsTheSame(
-            oldItem: EntryWithActivity,
-            newItem: EntryWithActivity
+            oldItem: WorkoutEntryWithActivity,
+            newItem: WorkoutEntryWithActivity
         ): Boolean {
-            return oldItem.entry.id == newItem.entry.id
+            return oldItem.workoutEntry.id == newItem.workoutEntry.id
         }
 
         override fun areContentsTheSame(
-            oldItem: EntryWithActivity,
-            newItem: EntryWithActivity
+            oldItem: WorkoutEntryWithActivity,
+            newItem: WorkoutEntryWithActivity
         ): Boolean {
             return oldItem == newItem
         }

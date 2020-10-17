@@ -11,7 +11,6 @@ import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
 import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.ZonedDateTime
 import java.util.*
 
 class AddEditWorkoutViewModel @ViewModelInject constructor(
@@ -24,8 +23,8 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val _date = MutableLiveData(LocalDate.now())
     val date: LiveData<LocalDate> = _date
 
-    private val _entries = MutableLiveData(listOf<EntryWithActivity>())
-    val entries: LiveData<List<EntryWithActivity>> = _entries
+    private val _entries = MutableLiveData(listOf<WorkoutEntryWithActivity>())
+    val entries: LiveData<List<WorkoutEntryWithActivity>> = _entries
 
     val activities = activityRepository.activities
 
@@ -45,7 +44,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             val workoutWithEntries = workoutRepository.getWorkout(workoutId)
             this@AddEditWorkoutViewModel.workoutId = workoutId
             _date.value = workoutWithEntries.workout.date
-            _entries.value = workoutWithEntries.entries
+            _entries.value = workoutWithEntries.workoutEntries
         }
     }
 
@@ -55,7 +54,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             workoutRepository.insertWorkout(workout)
 
             for (entryWithActivity in entries.value!!) {
-                workoutRepository.insertEntry(entryWithActivity.entry)
+                workoutRepository.insertEntry(entryWithActivity.workoutEntry)
             }
 
             close()
@@ -81,7 +80,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             val entriesToDelete = prevEntries.dropWhile {
                 // drop if this entry is in entries
                 for (entryWithActivity in entries.value!!) {
-                    if (entryWithActivity.entry.id == it.id) {
+                    if (entryWithActivity.workoutEntry.id == it.id) {
                         return@dropWhile true
                     }
                 }
@@ -95,7 +94,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             for (entryWithActivity in entries.value!!) {
                 // don't use update, use insert because onConflict = Replace. So if already exists
                 // will be updated; if doesn't exist will be inserted.
-                workoutRepository.insertEntry(entryWithActivity.entry)
+                workoutRepository.insertEntry(entryWithActivity.workoutEntry)
             }
 
             close()
@@ -103,8 +102,8 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     }
 
     fun chooseActivity(activity: Activity) {
-        val entry = Entry(activity.id,workoutId,"", date.value!!)
-        val entryWithActivity = EntryWithActivity(entry, activity)
+        val entry = WorkoutEntry(activity.id,workoutId,"", date.value!!)
+        val entryWithActivity = WorkoutEntryWithActivity(entry, activity)
         _entries.value = _entries.value!!.plusElement(entryWithActivity)
     }
 

@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kiwicorp.supersimplegymapp.data.Entry
+import com.kiwicorp.supersimplegymapp.data.WorkoutEntry
 import com.kiwicorp.supersimplegymapp.databinding.ItemActivityDetailEntryBinding
 
-class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.EntryViewHolder>(EntryDiffCallback()) {
+class EntryListAdapter : ListAdapter<WorkoutEntry, EntryListAdapter.EntryViewHolder>(EntryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
         return EntryViewHolder.from(parent)
@@ -19,8 +19,8 @@ class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.EntryViewHolder>(En
     }
 
     class EntryViewHolder(private val binding: ItemActivityDetailEntryBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(entry: Entry) {
-            binding.entry = entry
+        fun bind(workoutEntry: WorkoutEntry) {
+            binding.entry = workoutEntry
         }
 
         companion object {
@@ -33,17 +33,17 @@ class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.EntryViewHolder>(En
         }
     }
 
-    class EntryDiffCallback: DiffUtil.ItemCallback<Entry>() {
+    class EntryDiffCallback: DiffUtil.ItemCallback<WorkoutEntry>() {
         override fun areItemsTheSame(
-            oldItem: Entry,
-            newItem: Entry
+            oldItem: WorkoutEntry,
+            newItem: WorkoutEntry
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: Entry,
-            newItem: Entry
+            oldItem: WorkoutEntry,
+            newItem: WorkoutEntry
         ): Boolean {
             return oldItem == newItem
         }

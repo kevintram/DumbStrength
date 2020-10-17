@@ -15,31 +15,31 @@ import java.util.*
         ForeignKey(
             entity = Activity::class,
             parentColumns = ["activity_id"],
-            childColumns = ["entry_activity_id"],
+            childColumns = ["workout_entry_activity_id"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Workout::class,
             parentColumns = ["workout_id"],
-            childColumns = ["entry_workout_creator_id"],
+            childColumns = ["workout_entry_workout_creator_id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
-data class Entry(
-    @ColumnInfo(name = "entry_activity_id")
+data class WorkoutEntry(
+    @ColumnInfo(name = "workout_entry_activity_id")
     val activityId: String,
 
-    @ColumnInfo(name = "entry_workout_creator_id")
+    @ColumnInfo(name = "workout_entry_workout_creator_id")
     val workoutId: String,
 
-    @ColumnInfo(name = "entry_description")
+    @ColumnInfo(name = "workout_entry_description")
     var description: String,
 
-    @ColumnInfo(name = "entry_date")
+    @ColumnInfo(name = "workout_entry_date")
     var date: LocalDate,
 
-    @PrimaryKey @ColumnInfo(name = "entry_id")
+    @PrimaryKey @ColumnInfo(name = "workout_entry_id")
     val id: String = UUID.randomUUID().toString()
 ) {
     val dateStr: String

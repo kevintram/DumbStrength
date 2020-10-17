@@ -3,6 +3,7 @@ package com.kiwicorp.supersimplegymapp.di
 import android.content.Context
 import androidx.room.Room
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
+import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
 import com.kiwicorp.supersimplegymapp.data.source.local.SuperSimpleGymAppDatabase
 import dagger.Module
@@ -25,7 +26,13 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideWorkoutRepository(superSimpleGymAppDatabase: SuperSimpleGymAppDatabase): WorkoutRepository {
-        return with(superSimpleGymAppDatabase) { WorkoutRepository(workoutDao(), workoutComponentDao()) }
+        return with(superSimpleGymAppDatabase) { WorkoutRepository(workoutDao(), workoutEntryDao()) }
+    }
+
+    @Singleton
+    @Provides
+    fun provideRoutineRepository(superSimpleGymAppDatabase: SuperSimpleGymAppDatabase): RoutineRepository {
+        return with(superSimpleGymAppDatabase) { RoutineRepository(routineDao(), routineEntryDao()) }
     }
 
     @Singleton

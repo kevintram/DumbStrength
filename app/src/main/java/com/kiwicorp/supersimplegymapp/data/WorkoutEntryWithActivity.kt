@@ -3,11 +3,11 @@ package com.kiwicorp.supersimplegymapp.data
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class EntryWithActivity (
+data class WorkoutEntryWithActivity (
     @Embedded
-    val entry: Entry,
+    val workoutEntry: WorkoutEntry,
     @Relation(
-        parentColumn = "entry_activity_id",
+        parentColumn = "workout_entry_activity_id",
         entityColumn = "activity_id",
         entity = Activity::class
     )

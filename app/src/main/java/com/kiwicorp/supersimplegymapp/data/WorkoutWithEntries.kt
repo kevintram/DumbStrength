@@ -8,16 +8,16 @@ data class WorkoutWithEntries (
     val workout: Workout,
     @Relation(
         parentColumn = "workout_id",
-        entityColumn = "entry_workout_creator_id",
-        entity = Entry::class
+        entityColumn = "workout_entry_workout_creator_id",
+        entity = WorkoutEntry::class
     )
-    val entries: List<EntryWithActivity>
+    val workoutEntries: List<WorkoutEntryWithActivity>
 ) {
     val description: String
         get() {
             var result = ""
-            for (entryWithActivity in entries) {
-                result += "${entryWithActivity.activity.name}\n\t${entryWithActivity.entry.description}\n"
+            for (entryWithActivity in workoutEntries) {
+                result += "${entryWithActivity.activity.name}\n\t${entryWithActivity.workoutEntry.description}\n"
             }
             return result
         }

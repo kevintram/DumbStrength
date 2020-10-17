@@ -2,10 +2,9 @@ package com.kiwicorp.supersimplegymapp.data.source
 
 import androidx.lifecycle.LiveData
 import com.kiwicorp.supersimplegymapp.data.Workout
-import com.kiwicorp.supersimplegymapp.data.Entry
-import com.kiwicorp.supersimplegymapp.data.EntryWithActivity
+import com.kiwicorp.supersimplegymapp.data.WorkoutEntry
 import com.kiwicorp.supersimplegymapp.data.WorkoutWithEntries
-import com.kiwicorp.supersimplegymapp.data.source.local.EntryDao
+import com.kiwicorp.supersimplegymapp.data.source.local.WorkoutEntryDao
 import com.kiwicorp.supersimplegymapp.data.source.local.WorkoutDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,7 +12,7 @@ import javax.inject.Inject
 
 class WorkoutRepository @Inject constructor(
     private val workoutDao: WorkoutDao,
-    private val entryDao: EntryDao
+    private val workoutEntryDao: WorkoutEntryDao
 ) {
     val workouts = workoutDao.observerWorkouts()
 
@@ -41,31 +40,31 @@ class WorkoutRepository @Inject constructor(
         }
     }
 
-    suspend fun insertEntry(entry: Entry) {
+    suspend fun insertEntry(workoutEntry: WorkoutEntry) {
         withContext(Dispatchers.IO) {
-            entryDao.insertEntry(entry)
+            workoutEntryDao.insertEntry(workoutEntry)
         }
     }
 
-    suspend fun updateEntry(entry: Entry): Int {
+    suspend fun updateEntry(workoutEntry: WorkoutEntry): Int {
         return withContext(Dispatchers.IO) {
-            entryDao.updateEntry(entry)
+            workoutEntryDao.updateEntry(workoutEntry)
         }
     }
 
-    suspend fun deleteEntry(entry: Entry): Int {
+    suspend fun deleteEntry(workoutEntry: WorkoutEntry): Int {
         return withContext(Dispatchers.IO) {
-            entryDao.deleteEntry(entry)
+            workoutEntryDao.deleteEntry(workoutEntry)
         }
     }
 
-    fun observeEntriesByActivityId(activityId: String): LiveData<List<Entry>> {
-        return entryDao.observeEntriesByActivityId(activityId)
+    fun observeEntriesByActivityId(activityId: String): LiveData<List<WorkoutEntry>> {
+        return workoutEntryDao.observeEntriesByActivityId(activityId)
     }
 
-    suspend fun getEntriesByWorkoutId(workoutId: String): List<Entry> {
+    suspend fun getEntriesByWorkoutId(workoutId: String): List<WorkoutEntry> {
         return withContext(Dispatchers.IO) {
-            entryDao.getEntriesByWorkoutId(workoutId)
+            workoutEntryDao.getEntriesByWorkoutId(workoutId)
         }
     }
 }
