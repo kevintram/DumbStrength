@@ -11,12 +11,12 @@ data class WorkoutWithEntries (
         entityColumn = "workout_entry_workout_creator_id",
         entity = WorkoutEntry::class
     )
-    val workoutEntries: List<WorkoutEntryWithActivity>
+    val entries: List<WorkoutEntryWithActivity>
 ) {
     val description: String
         get() {
             var result = ""
-            for (entryWithActivity in workoutEntries) {
+            for (entryWithActivity in entries) {
                 result += "${entryWithActivity.activity.name}\n\t${entryWithActivity.workoutEntry.description}\n"
             }
             return result

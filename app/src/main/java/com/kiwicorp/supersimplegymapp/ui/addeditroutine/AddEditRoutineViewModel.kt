@@ -1,4 +1,4 @@
-package com.kiwicorp.supersimplegymapp.ui.addeditworkout
+package com.kiwicorp.supersimplegymapp.ui.addeditroutine
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -8,23 +8,21 @@ import androidx.lifecycle.viewModelScope
 import com.kiwicorp.supersimplegymapp.Event
 import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
-import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
+import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.util.*
 
-class AddEditWorkoutViewModel @ViewModelInject constructor(
-    private val workoutRepository: WorkoutRepository,
+class AddEditRoutineViewModel @ViewModelInject constructor(
+    private val routineRepository: RoutineRepository,
     activityRepository: ActivityRepository
 ): ViewModel() {
-    //initialize workout id here it can be used for entries
-    private var workoutId = UUID.randomUUID().toString()
+    //initialize routine id here it can be used for entries
+    private var routineId = UUID.randomUUID().toString()
 
-    private val _date = MutableLiveData(LocalDate.now())
-    val date: LiveData<LocalDate> = _date
+    private val _entries = MutableLiveData(listOf<RoutineEntryWithActivity>())
+    val entries: LiveData<List<RoutineEntryWithActivity>> = _entries
 
-    private val _entries = MutableLiveData(listOf<WorkoutEntryWithActivity>())
-    val entries: LiveData<List<WorkoutEntryWithActivity>> = _entries
+    val name = MutableLiveData("")
 
     val activities = activityRepository.activities
 
@@ -34,53 +32,50 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val _close = MutableLiveData<Event<Unit>>()
     val close: LiveData<Event<Unit>> = _close
 
-    fun loadWorkout(workoutId: String) {
-        // stop if workout already loaded (needed because all changes will be undone when navigating
-        // from ChooseActivityFragment to AddEditWorkoutFragment)
-        if (workoutId == this.workoutId) {
+    fun loadRoutine(routineId: String) {
+        if (routineId == this.routineId) {
             return
         }
         viewModelScope.launch {
-            val workoutWithEntries = workoutRepository.getWorkout(workoutId)
-            this@AddEditWorkoutViewModel.workoutId = workoutId
-            _date.value = workoutWithEntries.workout.date
-            _entries.value = workoutWithEntries.entries
+            val routineWithEntries = routineRepository.getRoutineWithEntriesById(routineId)
+            this@AddEditRoutineViewModel.routineId = routineId
+            _entries.value = routineWithEntries.entries
         }
     }
 
-    fun insertWorkoutAndClose() {
+    fun insertRoutineAndClose() {
         viewModelScope.launch {
-            val workout = Workout(date.value!!,workoutId)
-            workoutRepository.insertWorkout(workout)
+            val routine = Routine(name.value!!, routineId)
+            routineRepository.insertRoutine(routine)
 
             for (entryWithActivity in entries.value!!) {
-                workoutRepository.insertEntry(entryWithActivity.workoutEntry)
+                routineRepository.insertEntry(entryWithActivity.routineEntry)
             }
 
             close()
         }
     }
 
-    fun deleteWorkoutAndClose() {
+    fun deleteRoutineAndClose() {
         viewModelScope.launch {
-            val workout = Workout(date.value!!, workoutId)
-            workoutRepository.deleteWorkout(workout)
-            // entries don't need to be deleted here because workout is a foreign key in WorkoutEntry
+            val routine = Routine(name.value!!, routineId)
+            routineRepository.deleteRoutine(routine)
+            // entries don't need to be deleted here because workout is a foreign key in RoutineEntry
             close()
         }
     }
 
-    fun updateWorkoutAndClose() {
+    fun updateRoutineAndClose() {
         viewModelScope.launch {
-            val workout = Workout(date.value!!, workoutId)
-            workoutRepository.updateWorkout(workout)
+            val routine = Routine(name.value!!,routineId)
+            routineRepository.updateRoutine(routine)
 
-            val prevEntries = workoutRepository.getEntriesByWorkoutId(workoutId)
+            val prevEntries = routineRepository.getEntriesByRoutineId(routineId)
 
             val entriesToDelete = prevEntries.dropWhile {
                 // drop if this entry is in entries
                 for (entryWithActivity in entries.value!!) {
-                    if (entryWithActivity.workoutEntry.id == it.id) {
+                    if (entryWithActivity.routineEntry.id == it.id) {
                         return@dropWhile true
                     }
                 }
@@ -88,13 +83,13 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             }
 
             for (entry in entriesToDelete) {
-                workoutRepository.deleteEntry(entry)
+                routineRepository.deleteEntry(entry)
             }
 
             for (entryWithActivity in entries.value!!) {
                 // don't use update, use insert because onConflict = Replace. So if already exists
                 // will be updated; if doesn't exist will be inserted.
-                workoutRepository.insertEntry(entryWithActivity.workoutEntry)
+                routineRepository.insertEntry(entryWithActivity.routineEntry)
             }
 
             close()
@@ -102,8 +97,8 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     }
 
     fun chooseActivity(activity: Activity) {
-        val entry = WorkoutEntry(activity.id,workoutId,"", date.value!!)
-        val entryWithActivity = WorkoutEntryWithActivity(entry, activity)
+        val entry = RoutineEntry(activity.id,routineId,"")
+        val entryWithActivity = RoutineEntryWithActivity(entry,activity)
         _entries.value = _entries.value!!.plusElement(entryWithActivity)
     }
 

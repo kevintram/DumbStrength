@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="entryWithActivity"
+            type="com.kiwicorp.supersimplegymapp.data.RoutineEntryWithActivity" />
+        <variable
+            name="viewModel"
+            type="com.kiwicorp.supersimplegymapp.ui.addeditroutine.AddEditRoutineViewModel" />
+        <import type="android.view.View"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/activity_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:textAppearance="?textAppearanceHeadline5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{entryWithActivity.activity.name}"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/activity_description_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:textAppearance="?textAppearanceBody2"
+            android:visibility="@{(entryWithActivity.activity.description == null)? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@+id/activity_name_text"
+            android:text="@{entryWithActivity.activity.description}"
+            tools:text="Activity Description" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginVertical="@dimen/margin_normal"
+            app:layout_constraintTop_toBottomOf="@+id/activity_description_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardElevation="4dp">
+
+            <EditText
+                android:id="@+id/entry_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                android:background="@android:color/transparent"
+                android:text="@{entryWithActivity.routineEntry.description}"
+                android:hint="@string/description" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -83,8 +83,27 @@
     <fragment
         android:id="@+id/routinesFragment"
         android:name="com.kiwicorp.supersimplegymapp.ui.routines.RoutinesFragment"
-        android:label="RoutinesFragment" />
+        android:label="RoutinesFragment" >
+        <action
+            android:id="@+id/toAddEditRoutineGraph"
+            app:destination="@id/addEditRoutineGraph" />
+    </fragment>
     <action
         android:id="@+id/toRoutinesFragment"
         app:destination="@id/routinesFragment" />
+    <navigation android:id="@+id/addEditRoutineGraph"
+        app:startDestination="@id/addEditRoutineFragment">
+        <fragment
+            android:id="@+id/addEditRoutineFragment"
+            android:name="com.kiwicorp.supersimplegymapp.ui.addeditroutine.AddEditRoutineFragment"
+            android:label="AddEditRoutineFragment" >
+            <action
+                android:id="@+id/toChooseActivityFragment"
+                app:destination="@id/chooseActivityFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/chooseActivityFragment"
+            android:name="com.kiwicorp.supersimplegymapp.ui.addeditroutine.ChooseActivityFragment"
+            android:label="ChooseActivityFragment" />
+    </navigation>
 </navigation>

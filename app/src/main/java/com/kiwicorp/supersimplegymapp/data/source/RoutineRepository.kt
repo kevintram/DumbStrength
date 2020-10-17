@@ -21,6 +21,12 @@ class RoutineRepository @Inject constructor(
       }
    }
 
+   suspend fun getRoutineWithEntriesById(routineId: String): RoutineWithEntries {
+      return withContext(Dispatchers.IO) {
+         routineDao.getRoutineWithEntriesById(routineId)
+      }
+   }
+
    suspend fun insertRoutine(routine: Routine) {
       withContext(Dispatchers.IO) {
          routineDao.insertRoutine(routine)
@@ -36,6 +42,12 @@ class RoutineRepository @Inject constructor(
    suspend fun deleteRoutine(routine: Routine): Int {
       return withContext(Dispatchers.IO) {
          routineDao.deleteRoutine(routine)
+      }
+   }
+
+   suspend fun getEntriesByRoutineId(routineId: String): List<RoutineEntry> {
+      return withContext(Dispatchers.IO) {
+         routineEntryDao.getEntriesByRoutineId(routineId)
       }
    }
 

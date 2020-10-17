@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.supersimplegymapp.data.WorkoutEntryWithActivity
-import com.kiwicorp.supersimplegymapp.databinding.ItemEntryBinding
+import com.kiwicorp.supersimplegymapp.databinding.ItemWorkoutEntryBinding
 
-class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
-    ListAdapter<WorkoutEntryWithActivity,EntryWithActivityListAdapter.EntryWithActivityViewHolder>(EntryWithActivityDiffCallback()) {
+class WorkoutEntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
+    ListAdapter<WorkoutEntryWithActivity,WorkoutEntryWithActivityListAdapter.EntryWithActivityViewHolder>(EntryWithActivityDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryWithActivityViewHolder {
         return EntryWithActivityViewHolder.from(parent)
@@ -20,7 +20,7 @@ class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewMode
         holder.bind(getItem(position),viewModel)
     }
 
-    class EntryWithActivityViewHolder(private val binding: ItemEntryBinding): RecyclerView.ViewHolder(binding.root) {
+    class EntryWithActivityViewHolder(private val binding: ItemWorkoutEntryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(workoutEntryWithActivity: WorkoutEntryWithActivity, viewModel: AddEditWorkoutViewModel) {
             binding.entryWithActivity = workoutEntryWithActivity
             binding.viewModel = viewModel
@@ -32,7 +32,7 @@ class EntryWithActivityListAdapter(private val viewModel: AddEditWorkoutViewMode
         companion object {
             fun from(parent: ViewGroup): EntryWithActivityViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemEntryBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemWorkoutEntryBinding.inflate(layoutInflater, parent, false)
 
                 return EntryWithActivityViewHolder(binding)
             }

@@ -1,4 +1,4 @@
-package com.kiwicorp.supersimplegymapp.ui.addeditworkout
+package com.kiwicorp.supersimplegymapp.ui.addeditroutine
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,7 +18,7 @@ class ChooseActivityFragment : Fragment() {
     private lateinit var binding: FragmentChooseActivityBinding
 
     // must pass defaultViewModelProviderFactory https://github.com/google/dagger/issues/1935
-    private val viewModel: AddEditWorkoutViewModel by navGraphViewModels(R.id.addEditWorkoutGraph) {
+    private val viewModel: AddEditRoutineViewModel by navGraphViewModels(R.id.addEditRoutineGraph) {
         defaultViewModelProviderFactory
     }
 

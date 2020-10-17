@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Entity(
-    tableName = "entries",
+    tableName = "workout_entries",
     foreignKeys = [
         ForeignKey(
             entity = Activity::class,
