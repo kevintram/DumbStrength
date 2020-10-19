@@ -1,5 +1,8 @@
 package com.kiwicorp.supersimplegymapp.data
 
+import android.text.SpannableStringBuilder
+import androidx.core.text.bold
+import androidx.core.text.inSpans
 import androidx.room.Embedded
 import androidx.room.Relation
 
@@ -13,11 +16,12 @@ data class WorkoutWithEntries (
     )
     val entries: List<WorkoutEntryWithActivity>
 ) {
-    val description: String
+    val description: SpannableStringBuilder
         get() {
-            var result = ""
+            val result = SpannableStringBuilder()
             for (entryWithActivity in entries) {
-                result += "${entryWithActivity.activity.name}\n\t${entryWithActivity.workoutEntry.description}\n"
+                result.bold { appendln(entryWithActivity.activity.name) }
+                    .appendln(entryWithActivity.workoutEntry.description)
             }
             return result
         }
