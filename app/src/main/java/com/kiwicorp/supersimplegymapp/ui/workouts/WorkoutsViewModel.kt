@@ -17,17 +17,17 @@ class WorkoutsViewModel @ViewModelInject constructor(
 ): ViewModel() {
     val workouts = workoutRepository.workouts
 
-    private val _navigateToAddWorkoutFragment = MutableLiveData<Event<Unit>>()
-    val navigateToAddWorkoutFragment: LiveData<Event<Unit>> = _navigateToAddWorkoutFragment
-
     private val _navigateToEditWorkoutFragment = MutableLiveData<Event<String>>()
     val navigateToEditWorkoutFragment: LiveData<Event<String>> = _navigateToEditWorkoutFragment
 
-    fun navigateToAddWorkoutFragment() {
-        _navigateToAddWorkoutFragment.value = Event(Unit)
-    }
+    private val _navigateToChooseRoutineFragment = MutableLiveData<Event<Unit>>()
+    val navigateToChooseRoutineFragment: LiveData<Event<Unit>> = _navigateToChooseRoutineFragment
 
     fun navigateToEditWorkoutFragment(workoutId: String) {
         _navigateToEditWorkoutFragment.value = Event(workoutId)
+    }
+
+    fun navigateToChooseRoutineFragment() {
+        _navigateToChooseRoutineFragment.value = Event(Unit)
     }
 }

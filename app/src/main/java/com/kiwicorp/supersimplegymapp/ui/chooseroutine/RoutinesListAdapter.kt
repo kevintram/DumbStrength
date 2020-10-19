@@ -1,4 +1,4 @@
-package com.kiwicorp.supersimplegymapp.ui.routines
+package com.kiwicorp.supersimplegymapp.ui.chooseroutine
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.supersimplegymapp.data.RoutineWithEntries
 import com.kiwicorp.supersimplegymapp.databinding.ItemRoutineBinding
 
-class RoutinesListAdapter(private val viewModel: RoutinesViewModel):
+class RoutinesListAdapter(private val viewModel: ChooseRoutineViewModel):
     ListAdapter<RoutineWithEntries, RoutinesListAdapter.RoutinesEntriesViewHolder>(RoutinesWithEntriesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutinesEntriesViewHolder {
@@ -20,10 +20,10 @@ class RoutinesListAdapter(private val viewModel: RoutinesViewModel):
     }
 
     class RoutinesEntriesViewHolder(private val binding: ItemRoutineBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(routineWithEntries: RoutineWithEntries, viewModel: RoutinesViewModel) {
+        fun bind(routineWithEntries: RoutineWithEntries, viewModel: ChooseRoutineViewModel) {
             binding.routineWithEntries = routineWithEntries
             binding.routineName.setOnClickListener {
-                viewModel.navigateToEditRoutineFragment(routineWithEntries.routine.id)
+                viewModel.navigateToAddWorkoutFragment(routineWithEntries.routine.id)
             }
         }
 

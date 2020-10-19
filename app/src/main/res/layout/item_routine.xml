@@ -6,9 +6,6 @@
         <variable
             name="routineWithEntries"
             type="com.kiwicorp.supersimplegymapp.data.RoutineWithEntries" />
-        <variable
-            name="viewModel"
-            type="com.kiwicorp.supersimplegymapp.ui.routines.RoutinesViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +19,6 @@
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{routineWithEntries.routine.name}"
-            android:onClick="@{()->viewModel.navigateToEditRoutineFragment(routineWithEntries.routine.id)}"
             tools:text="Name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

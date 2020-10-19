@@ -73,6 +73,7 @@ class AddEditWorkoutFragment: Fragment() {
             binding.toolbar.setNavigationOnClickListener { viewModel.updateWorkoutAndClose() }
         } else {
             binding.toolbar.title = "Add Workout"
+            args.routineId?.let { viewModel.loadRoutine(it) }
             binding.toolbar.setNavigationOnClickListener { viewModel.insertWorkoutAndClose() }
         }
     }

@@ -21,6 +21,9 @@
         <action
             android:id="@+id/toAddEditWorkoutGraph"
             app:destination="@id/addEditWorkoutGraph" />
+        <action
+            android:id="@+id/toChooseRoutineFragment"
+            app:destination="@id/chooseRoutineFragment" />
     </fragment>
     <action
         android:id="@+id/toActivitiesFragment"
@@ -49,6 +52,10 @@
             android:name="workoutId"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="routineId"
+            app:argType="string"
+            app:nullable="true" />
         <fragment
             android:id="@+id/addEditWorkoutFragment"
             android:name="com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment"
@@ -63,6 +70,10 @@
                 android:name="workoutId"
                 app:argType="string"
                 app:nullable="true"/>
+            <argument
+                android:name="routineId"
+                app:argType="string"
+                app:nullable="true" />
         </fragment>
         <fragment
             android:id="@+id/chooseActivityFragment"
@@ -120,4 +131,12 @@
             android:name="com.kiwicorp.supersimplegymapp.ui.addeditroutine.ChooseActivityFragment"
             android:label="ChooseActivityFragment" />
     </navigation>
+    <fragment
+        android:id="@+id/chooseRoutineFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.chooseroutine.ChooseRoutineFragment"
+        android:label="ChooseRoutineFragment" >
+        <action
+            android:id="@+id/toAddEditWorkoutGraph"
+            app:destination="@id/addEditWorkoutGraph" />
+    </fragment>
 </navigation>

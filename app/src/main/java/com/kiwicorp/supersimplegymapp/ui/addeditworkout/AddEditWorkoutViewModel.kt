@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.kiwicorp.supersimplegymapp.Event
 import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
+import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -15,6 +16,7 @@ import java.util.*
 
 class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val workoutRepository: WorkoutRepository,
+    private val routineRepository: RoutineRepository,
     activityRepository: ActivityRepository
 ): ViewModel() {
     //initialize workout id here it can be used for entries
@@ -45,6 +47,19 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             this@AddEditWorkoutViewModel.workoutId = workoutId
             _date.value = workoutWithEntries.workout.date
             _entries.value = workoutWithEntries.entries
+        }
+    }
+
+    fun loadRoutine(routineId: String) {
+        viewModelScope.launch {
+            val routine = routineRepository.getRoutineWithEntriesById(routineId)
+            for (entryWithActivity in routine.entries) {
+               val activity = entryWithActivity.activity
+               val entry = entryWithActivity.routineEntry
+
+               val workoutEntry = WorkoutEntry(entry.activityId,workoutId,entry.description,date.value!!)
+               _entries.value = entries.value!!.plus(WorkoutEntryWithActivity(workoutEntry,activity))
+           }
         }
     }
 
