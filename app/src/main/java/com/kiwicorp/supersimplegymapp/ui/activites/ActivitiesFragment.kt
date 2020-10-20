@@ -58,7 +58,7 @@ class ActivitiesFragment : Fragment() {
         adapter = ActivitiesListAdapter(viewModel)
         binding.activitiesRecyclerView.adapter = adapter
         viewModel.activities.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.addHeadersAndSubmitList(it)
         })
     }
 

@@ -6,10 +6,10 @@ import com.kiwicorp.supersimplegymapp.data.Activity
 
 @Dao
 interface ActivityDao {
-    @Query("SELECT * FROM activities")
+    @Query("SELECT * FROM activities ORDER BY activity_name")
     fun observeActivities(): LiveData<List<Activity>>
 
-    @Query("SELECT * FROM activities")
+    @Query("SELECT * FROM activities ORDER BY activity_name")
     suspend fun getActivities(): List<Activity>
 
     @Query("SELECT * FROM activities WHERE activity_id = :activityId")
