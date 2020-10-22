@@ -8,11 +8,11 @@ import com.kiwicorp.supersimplegymapp.data.WorkoutWithEntries
 @Dao
 interface WorkoutDao {
     @Transaction
-    @Query("SELECT * FROM workouts")
+    @Query("SELECT * FROM workouts ORDER BY workout_date DESC")
     fun observerWorkouts(): LiveData<List<WorkoutWithEntries>>
 
     @Transaction
-    @Query("SELECT * FROM workouts")
+    @Query("SELECT * FROM workouts ORDER BY workout_date DESC")
     suspend fun getWorkouts(): List<WorkoutWithEntries>
 
     @Transaction

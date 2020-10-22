@@ -6,10 +6,10 @@ import com.kiwicorp.supersimplegymapp.data.WorkoutEntry
 
 @Dao
 interface WorkoutEntryDao {
-    @Query("SELECT * FROM workout_entries WHERE workout_entry_activity_id = :activityId")
+    @Query("SELECT * FROM workout_entries WHERE workout_entry_activity_id = :activityId ORDER BY workout_entry_date DESC")
     fun observeEntriesByActivityId(activityId: String): LiveData<List<WorkoutEntry>>
 
-    @Query("SELECT * FROM workout_entries WHERE workout_entry_workout_creator_id = :workoutId")
+    @Query("SELECT * FROM workout_entries WHERE workout_entry_workout_creator_id = :workoutId ORDER BY workout_entry_date DESC")
     suspend fun getEntriesByWorkoutId(workoutId: String): List<WorkoutEntry>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
