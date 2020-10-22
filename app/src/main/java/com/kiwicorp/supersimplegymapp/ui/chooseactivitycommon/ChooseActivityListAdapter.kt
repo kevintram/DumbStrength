@@ -16,8 +16,8 @@ import kotlinx.coroutines.withContext
 const val ITEM_ACTIVITY_VIEW_TYPE = 0
 const val ITEM_LETTER_HEADER_VIEW_TYPE = 1
 
-class BetterChooseActivityListAdapter(private val chooseActivityActions: ChooseActivityActions):
-    ListAdapter<BetterChooseActivityListAdapter.Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
+class ChooseActivityListAdapter(private val chooseActivityActions: ChooseActivityActions):
+    ListAdapter<ChooseActivityListAdapter.Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -151,4 +151,9 @@ class BetterChooseActivityListAdapter(private val chooseActivityActions: ChooseA
         }
     }
 
+    interface ChooseActivityActions {
+        fun chooseActivity(activity: Activity)
+        fun unchooseActivity(activity: Activity)
+        fun activityIsInEntries(activity: Activity): Boolean
+    }
 }

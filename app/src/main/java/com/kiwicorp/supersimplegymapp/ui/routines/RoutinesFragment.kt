@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentRoutinesBinding
+import com.kiwicorp.supersimplegymapp.ui.routinecommon.RoutinesListAdapter
 import com.kiwicorp.supersimplegymapp.ui.routines.RoutinesFragmentDirections.Companion.toAddEditRoutineGraph
 import com.kiwicorp.supersimplegymapp.util.Mode
 import dagger.hilt.android.AndroidEntryPoint

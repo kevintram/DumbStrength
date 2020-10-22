@@ -10,7 +10,7 @@ import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
-import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityActions
+import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityListAdapter
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.*
@@ -19,7 +19,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val workoutRepository: WorkoutRepository,
     private val routineRepository: RoutineRepository,
     activityRepository: ActivityRepository
-): ViewModel(), ChooseActivityActions {
+): ViewModel(), ChooseActivityListAdapter.ChooseActivityActions {
     //initialize workout id here it can be used for entries
     private var workoutId = UUID.randomUUID().toString()
 

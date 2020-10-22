@@ -1,14 +1,15 @@
-package com.kiwicorp.supersimplegymapp.ui.chooseroutine
+package com.kiwicorp.supersimplegymapp.ui.routinecommon
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kiwicorp.supersimplegymapp.data.Routine
 import com.kiwicorp.supersimplegymapp.data.RoutineWithEntries
 import com.kiwicorp.supersimplegymapp.databinding.ItemRoutineBinding
 
-class RoutinesListAdapter(private val viewModel: ChooseRoutineViewModel):
+class RoutinesListAdapter(private val onRoutineClickListener: OnRoutineClickListener):
     ListAdapter<RoutineWithEntries, RoutinesListAdapter.RoutinesEntriesViewHolder>(RoutinesWithEntriesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutinesEntriesViewHolder {
@@ -16,14 +17,14 @@ class RoutinesListAdapter(private val viewModel: ChooseRoutineViewModel):
     }
 
     override fun onBindViewHolder(holder: RoutinesEntriesViewHolder, position: Int) {
-        holder.bind(getItem(position), viewModel)
+        holder.bind(getItem(position), onRoutineClickListener)
     }
 
     class RoutinesEntriesViewHolder(private val binding: ItemRoutineBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(routineWithEntries: RoutineWithEntries, viewModel: ChooseRoutineViewModel) {
+        fun bind(routineWithEntries: RoutineWithEntries, onRoutineClickListener: OnRoutineClickListener) {
             binding.routineWithEntries = routineWithEntries
-            binding.routineName.setOnClickListener {
-                viewModel.navigateToAddWorkoutFragment(routineWithEntries.routine.id)
+            binding.layout.setOnClickListener {
+                onRoutineClickListener.onRoutineClick(routineWithEntries.routine)
             }
         }
 
@@ -52,5 +53,9 @@ class RoutinesListAdapter(private val viewModel: ChooseRoutineViewModel):
             return oldItem == newItem
         }
 
+    }
+
+    interface OnRoutineClickListener {
+        fun onRoutineClick(routine: Routine)
     }
 }

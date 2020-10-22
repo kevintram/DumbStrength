@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentChooseRoutineBinding
 import com.kiwicorp.supersimplegymapp.ui.chooseroutine.ChooseRoutineFragmentDirections.Companion.toAddEditWorkoutGraph
+import com.kiwicorp.supersimplegymapp.ui.routinecommon.RoutinesListAdapter
 import com.kiwicorp.supersimplegymapp.util.Mode
 import dagger.hilt.android.AndroidEntryPoint
 

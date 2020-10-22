@@ -8,6 +8,7 @@
             type="com.kiwicorp.supersimplegymapp.data.RoutineWithEntries" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

@@ -9,14 +9,14 @@ import com.kiwicorp.supersimplegymapp.Event
 import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
-import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityActions
+import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityListAdapter
 import kotlinx.coroutines.launch
 import java.util.*
 
 class AddEditRoutineViewModel @ViewModelInject constructor(
     private val routineRepository: RoutineRepository,
     activityRepository: ActivityRepository
-): ViewModel(), ChooseActivityActions {
+): ViewModel(), ChooseActivityListAdapter.ChooseActivityActions {
     //initialize routine id here it can be used for entries
     private var routineId = UUID.randomUUID().toString()
 

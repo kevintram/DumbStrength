@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kiwicorp.supersimplegymapp.Event
+import com.kiwicorp.supersimplegymapp.data.Routine
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
+import com.kiwicorp.supersimplegymapp.ui.routinecommon.RoutinesListAdapter
 
 class RoutinesViewModel @ViewModelInject constructor(
     private val routineRepository: RoutineRepository
-): ViewModel() {
+): ViewModel(), RoutinesListAdapter.OnRoutineClickListener {
     val routines = routineRepository.routines
 
     private val _navigateToAddRoutineFragment = MutableLiveData<Event<Unit>>()
@@ -24,5 +26,9 @@ class RoutinesViewModel @ViewModelInject constructor(
 
     fun navigateToEditRoutineFragment(routineId: String) {
         _navigateToEditRoutineFragment.value = Event(routineId)
+    }
+
+    override fun onRoutineClick(routine: Routine) {
+        navigateToEditRoutineFragment(routine.id)
     }
 }
