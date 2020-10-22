@@ -10,6 +10,7 @@ import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.data.source.WorkoutRepository
+import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityActions
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.*
@@ -18,7 +19,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val workoutRepository: WorkoutRepository,
     private val routineRepository: RoutineRepository,
     activityRepository: ActivityRepository
-): ViewModel() {
+): ViewModel(), ChooseActivityActions {
     //initialize workout id here it can be used for entries
     private var workoutId = UUID.randomUUID().toString()
 
@@ -116,17 +117,26 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
         }
     }
 
-    fun chooseActivity(activity: Activity) {
+    override fun chooseActivity(activity: Activity) {
         val entry = WorkoutEntry(activity.id,workoutId,"", date.value!!)
         val entryWithActivity = WorkoutEntryWithActivity(entry, activity)
         _entries.value = _entries.value!!.plusElement(entryWithActivity)
     }
 
-    fun unchooseActivity(activity: Activity) {
+    override fun unchooseActivity(activity: Activity) {
         // drop entries with the same activity (for some reason dropWhile() will not work)
         _entries.value = _entries.value!!.filter {
             it.activity.id != activity.id
         }
+    }
+
+    override fun activityIsInEntries(activity: Activity): Boolean {
+        for (entryWithActivity in entries.value!!) {
+            if (entryWithActivity.activity == activity) {
+                return true
+            }
+        }
+        return false
     }
 
     fun navigateToChooseActivityFragment() {

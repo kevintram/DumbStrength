@@ -1,4 +1,4 @@
-package com.kiwicorp.supersimplegymapp.ui.addeditworkout
+package com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.supersimplegymapp.data.Activity
-import com.kiwicorp.supersimplegymapp.data.WorkoutEntryWithActivity
 import com.kiwicorp.supersimplegymapp.databinding.ItemCheckableActivityBinding
 import com.kiwicorp.supersimplegymapp.databinding.ItemLetterHeaderBinding
 import kotlinx.coroutines.CoroutineScope
@@ -17,9 +16,8 @@ import kotlinx.coroutines.withContext
 const val ITEM_ACTIVITY_VIEW_TYPE = 0
 const val ITEM_LETTER_HEADER_VIEW_TYPE = 1
 
-class ChooseActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
-    ListAdapter<ChooseActivityListAdapter.Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
-
+class BetterChooseActivityListAdapter(private val chooseActivityActions: ChooseActivityActions):
+    ListAdapter<BetterChooseActivityListAdapter.Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,7 +32,7 @@ class ChooseActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
         when (holder) {
             is CheckableActivityViewHolder -> {
                 val activity = (getItem(position) as Item.ActivityItem).activity
-                holder.bind(activity,viewModel)
+                holder.bind(activity,chooseActivityActions)
             }
             is LetterHeaderViewHolder -> {
                 val letter = (getItem(position) as Item.LetterHeaderItem).letter
@@ -86,32 +84,23 @@ class ChooseActivityListAdapter(private val viewModel: AddEditWorkoutViewModel):
     }
 
     class CheckableActivityViewHolder(private val binding: ItemCheckableActivityBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(activity: Activity, viewModel: AddEditWorkoutViewModel) {
+        fun bind(activity: Activity, chooseActivityActions: ChooseActivityActions) {
             binding.activity = activity
 
             binding.layout.setOnClickListener {
                 binding.checkbox.isChecked = !binding.checkbox.isChecked
             }
 
-            binding.checkbox.isChecked = activityIsInEntries(activity, viewModel.entries.value!!)
+            binding.checkbox.isChecked = chooseActivityActions.activityIsInEntries(activity)
 
             binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    viewModel.chooseActivity(activity)
+                    chooseActivityActions.chooseActivity(activity)
                 } else {
-                    viewModel.unchooseActivity(activity)
+                    chooseActivityActions.unchooseActivity(activity)
                 }
             }
 
-        }
-
-        private fun activityIsInEntries(activity: Activity, entriesWithActivityWorkout: List<WorkoutEntryWithActivity>): Boolean {
-            for (entryWithActivity in entriesWithActivityWorkout) {
-                if (entryWithActivity.activity == activity) {
-                    return true
-                }
-            }
-            return false
         }
 
         companion object {

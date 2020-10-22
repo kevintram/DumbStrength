@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentChooseActivityBinding
+import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.BetterChooseActivityListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +23,7 @@ class ChooseActivityFragment : Fragment() {
         defaultViewModelProviderFactory
     }
 
-    private lateinit var adapter: ChooseActivityListAdapter
+    private lateinit var adapter: BetterChooseActivityListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +43,7 @@ class ChooseActivityFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ChooseActivityListAdapter(viewModel)
+        adapter = BetterChooseActivityListAdapter(viewModel)
         binding.activityRecyclerView.adapter = adapter
         viewModel.activities.observe(viewLifecycleOwner, Observer {
             adapter.addHeadersAndSubmitList(it)
