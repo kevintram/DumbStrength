@@ -45,7 +45,7 @@ class ChooseActivityFragment : Fragment() {
         adapter = ChooseActivityListAdapter(viewModel)
         binding.activityRecyclerView.adapter = adapter
         viewModel.activities.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.addHeadersAndSubmitList(it)
         })
     }
 }
