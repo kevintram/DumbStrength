@@ -62,10 +62,6 @@ class ActivitiesFragment : Fragment() {
 
     private fun setupSearchView() {
         with(binding.searchView) {
-            setOnSearchClickListener {
-                (requireActivity() as MainActivity).hideTabLayout()
-            }
-
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
@@ -76,11 +72,6 @@ class ActivitiesFragment : Fragment() {
                     return true
                 }
             })
-
-            setOnCloseListener {
-                (requireActivity() as MainActivity).showTabLayout()
-                false
-            }
         }
     }
 
