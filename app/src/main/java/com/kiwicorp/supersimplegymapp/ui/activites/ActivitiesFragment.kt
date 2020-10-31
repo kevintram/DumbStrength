@@ -18,6 +18,7 @@ import com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragmentDirections.
 import com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment
 import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment
 import com.kiwicorp.supersimplegymapp.util.Mode
+import com.kiwicorp.supersimplegymapp.util.closeKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -80,6 +81,7 @@ class ActivitiesFragment : Fragment() {
             findNavController().navigate(toAddEditActivityFragment(Mode.ADD, null))
         })
         viewModel.navigateToActivityDetailFragment.observe(viewLifecycleOwner, EventObserver { activityId ->
+            closeKeyboard()
             findNavController().navigate(toActivityDetailFragment(activityId))
         })
     }
