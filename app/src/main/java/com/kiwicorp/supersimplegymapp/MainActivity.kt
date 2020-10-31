@@ -44,6 +44,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    fun hideTabLayout() {
+        tabLayout.visibility = View.GONE
+    }
+
+    fun showTabLayout() {
+        tabLayout.visibility = View.VISIBLE
+    }
+
     private fun setUpNavController() {
         findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { _, destination, _ ->
             tabLayout.visibility = when(destination.id) {

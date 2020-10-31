@@ -20,8 +20,20 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Toolbar.Surface"
-                app:title="Activities" />
+                style="@style/Widget.MaterialComponents.Toolbar.Surface">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconifiedByDefault="false"
+                    android:paddingStart="-16dp"
+                    app:searchHintIcon="@null"
+                    app:queryBackground="@android:color/transparent"
+                    app:queryHint="Search Exercises"/>
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView

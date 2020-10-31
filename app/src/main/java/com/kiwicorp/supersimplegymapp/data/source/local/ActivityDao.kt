@@ -12,6 +12,9 @@ interface ActivityDao {
     @Query("SELECT * FROM activities ORDER BY activity_name")
     suspend fun getActivities(): List<Activity>
 
+    @Query("SELECT * FROM activities WHERE activity_name LIKE '%' || :query || '%' ORDER BY activity_name")
+    suspend fun getSearchedActivities(query: String?): List<Activity>
+
     @Query("SELECT * FROM activities WHERE activity_id = :activityId")
     fun observeActivity(activityId: String): LiveData<Activity>
 

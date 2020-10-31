@@ -11,6 +11,12 @@ class ActivityRepository @Inject constructor(private val activityDao: ActivityDa
 
     val activities = activityDao.observeActivities()
 
+    suspend fun getSearchActivities(query: String?): List<Activity> {
+        return withContext(Dispatchers.IO) {
+            activityDao.getSearchedActivities(query)
+        }
+    }
+
     suspend fun getActivities(): List<Activity> {
         return withContext(Dispatchers.IO) {
             activityDao.getActivities()

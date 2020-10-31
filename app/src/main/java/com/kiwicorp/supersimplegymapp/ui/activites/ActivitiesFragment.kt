@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.kiwicorp.supersimplegymapp.Event
 import com.kiwicorp.supersimplegymapp.EventObserver
+import com.kiwicorp.supersimplegymapp.MainActivity
 import com.kiwicorp.supersimplegymapp.databinding.FragmentActivitiesBinding
 import com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragmentDirections.Companion.toActivityDetailFragment
 import com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragmentDirections.Companion.toAddEditActivityFragment
@@ -42,16 +44,12 @@ class ActivitiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupSearchView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.navigateToAddActivityFragment.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(toAddEditActivityFragment(Mode.ADD, null))
-        })
-        viewModel.navigateToActivityDetailFragment.observe(viewLifecycleOwner, EventObserver { activityId ->
-            findNavController().navigate(toActivityDetailFragment(activityId))
-        })
+        setupNavigation()
     }
 
     private fun setupRecyclerView() {
@@ -59,6 +57,39 @@ class ActivitiesFragment : Fragment() {
         binding.activitiesRecyclerView.adapter = adapter
         viewModel.activities.observe(viewLifecycleOwner, Observer {
             adapter.addHeadersAndSubmitList(it)
+        })
+    }
+
+    private fun setupSearchView() {
+        with(binding.searchView) {
+            setOnSearchClickListener {
+                (requireActivity() as MainActivity).hideTabLayout()
+            }
+
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    viewModel.onSearchQueryChanged(newText)
+                    return true
+                }
+            })
+
+            setOnCloseListener {
+                (requireActivity() as MainActivity).showTabLayout()
+                false
+            }
+        }
+    }
+
+    private fun setupNavigation() {
+        viewModel.navigateToAddActivityFragment.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(toAddEditActivityFragment(Mode.ADD, null))
+        })
+        viewModel.navigateToActivityDetailFragment.observe(viewLifecycleOwner, EventObserver { activityId ->
+            findNavController().navigate(toActivityDetailFragment(activityId))
         })
     }
 
