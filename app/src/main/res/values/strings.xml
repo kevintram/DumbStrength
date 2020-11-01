@@ -13,5 +13,6 @@
     <string name="menu_item_delete_routine">Delete Routine</string>
     <string name="skip">Skip</string>
     <string name="menu_item_add_activity">Add Activity</string>
+    <string name="activity">Activity</string>
 
 </resources>
