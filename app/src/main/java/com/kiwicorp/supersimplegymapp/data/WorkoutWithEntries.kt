@@ -21,7 +21,12 @@ data class WorkoutWithEntries (
             val result = SpannableStringBuilder()
             for (entryWithActivity in entries) {
                 result.bold { appendln(entryWithActivity.activity.name) }
-                    .appendln(entryWithActivity.workoutEntry.description)
+                if (entryWithActivity.workoutEntry.description != "") {
+                    result.appendln(entryWithActivity.workoutEntry.description)
+                }
+            }
+            if (result.isNotEmpty()) {
+                result.delete(result.length - 1,result.length)
             }
             return result
         }
