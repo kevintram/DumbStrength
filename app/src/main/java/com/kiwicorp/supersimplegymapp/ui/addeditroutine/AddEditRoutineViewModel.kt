@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiwicorp.supersimplegymapp.Event
 import com.kiwicorp.supersimplegymapp.data.*
-import com.kiwicorp.supersimplegymapp.data.source.ActivityRepository
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityListAdapter
 import kotlinx.coroutines.launch
@@ -22,7 +21,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
     private val _entries = MutableLiveData(listOf<RoutineEntryWithActivity>())
     val entries: LiveData<List<RoutineEntryWithActivity>> = _entries
 
-    val name = MutableLiveData("")
+    val name = MutableLiveData("Routine #${routineRepository.routines.value?.size?.plus(1) ?: 1}")
 
     private val _navigateToChooseActivityFragment = MutableLiveData<Event<Unit>>()
     val navigateToChooseActivityFragment: LiveData<Event<Unit>> = _navigateToChooseActivityFragment
