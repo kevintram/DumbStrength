@@ -17,6 +17,7 @@ import com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragmentDirections.
 import com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragmentDirections.Companion.toAddEditActivityFragment
 import com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment
 import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment
+import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.SearchActivityViewModel
 import com.kiwicorp.supersimplegymapp.util.Mode
 import com.kiwicorp.supersimplegymapp.util.closeKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,8 @@ class ActivitiesFragment : Fragment() {
     private lateinit var adapter: ActivitiesListAdapter
 
     private val viewModel: ActivitiesViewModel by viewModels()
+
+    private val searchViewModel: SearchActivityViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +59,7 @@ class ActivitiesFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = ActivitiesListAdapter(viewModel)
         binding.activitiesRecyclerView.adapter = adapter
-        viewModel.activities.observe(viewLifecycleOwner, Observer {
+        searchViewModel.activities.observe(viewLifecycleOwner, Observer {
             adapter.addHeadersAndSubmitList(it)
         })
     }
@@ -69,7 +72,7 @@ class ActivitiesFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    viewModel.onSearchQueryChanged(newText)
+                    searchViewModel.onSearchQueryChanged(newText)
                     return true
                 }
             })

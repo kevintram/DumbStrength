@@ -14,8 +14,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class AddEditRoutineViewModel @ViewModelInject constructor(
-    private val routineRepository: RoutineRepository,
-    activityRepository: ActivityRepository
+    private val routineRepository: RoutineRepository
 ): ViewModel(), ChooseActivityListAdapter.ChooseActivityActions {
     //initialize routine id here it can be used for entries
     private var routineId = UUID.randomUUID().toString()
@@ -24,8 +23,6 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
     val entries: LiveData<List<RoutineEntryWithActivity>> = _entries
 
     val name = MutableLiveData("")
-
-    val activities = activityRepository.activities
 
     private val _navigateToChooseActivityFragment = MutableLiveData<Event<Unit>>()
     val navigateToChooseActivityFragment: LiveData<Event<Unit>> = _navigateToChooseActivityFragment

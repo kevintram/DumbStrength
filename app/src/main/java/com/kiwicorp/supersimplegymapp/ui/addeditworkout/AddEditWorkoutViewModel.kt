@@ -17,8 +17,7 @@ import java.util.*
 
 class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val workoutRepository: WorkoutRepository,
-    private val routineRepository: RoutineRepository,
-    activityRepository: ActivityRepository
+    private val routineRepository: RoutineRepository
 ): ViewModel(), ChooseActivityListAdapter.ChooseActivityActions {
     //initialize workout id here it can be used for entries
     private var workoutId = UUID.randomUUID().toString()
@@ -28,8 +27,6 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
 
     private val _entries = MutableLiveData(listOf<WorkoutEntryWithActivity>())
     val entries: LiveData<List<WorkoutEntryWithActivity>> = _entries
-
-    val activities = activityRepository.activities
 
     private val _navigateToChooseActivityFragment = MutableLiveData<Event<Unit>>()
     val navigateToChooseActivityFragment: LiveData<Event<Unit>> = _navigateToChooseActivityFragment
