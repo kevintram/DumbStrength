@@ -3,6 +3,7 @@ package com.kiwicorp.supersimplegymapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.kiwicorp.supersimplegymapp.NavGraphDirections.Companion.toActivitiesFragment
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTabLayout() {
         tabLayout= findViewById(R.id.tab_layout)
+        delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
