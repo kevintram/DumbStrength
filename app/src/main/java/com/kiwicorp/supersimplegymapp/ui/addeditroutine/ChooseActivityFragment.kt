@@ -12,8 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentChooseActivityBinding
+import com.kiwicorp.supersimplegymapp.ui.addeditroutine.ChooseActivityFragmentDirections.Companion.toAddEditActivityFragment
 import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityListAdapter
 import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.SearchActivityViewModel
+import com.kiwicorp.supersimplegymapp.util.Mode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,8 +46,7 @@ class ChooseActivityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        setupSearchView()
-        binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        setupAppBar()
     }
 
     private fun setupRecyclerView() {
@@ -54,6 +55,19 @@ class ChooseActivityFragment : Fragment() {
         searchViewModel.activities.observe(viewLifecycleOwner, Observer {
             adapter.addHeadersAndSubmitList(it)
         })
+    }
+
+    private fun setupAppBar() {
+        setupSearchView()
+        binding.toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        binding.toolbar.setOnMenuItemClickListener {
+            return@setOnMenuItemClickListener if(it.itemId == R.id.menu_item_add_activity) {
+                findNavController().navigate(toAddEditActivityFragment(Mode.ADD,null))
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun setupSearchView() {

@@ -79,6 +79,9 @@
             android:id="@+id/chooseActivityFragment"
             android:name="com.kiwicorp.supersimplegymapp.ui.addeditworkout.ChooseActivityFragment"
             android:label="ChooseActivityFragment" />
+        <action
+            android:id="@+id/toAddEditActivityFragment"
+            app:destination="@id/addEditActivityFragment" />
     </navigation>
     <fragment
         android:id="@+id/activityDetailFragment"
@@ -130,6 +133,9 @@
             android:id="@+id/chooseActivityFragment"
             android:name="com.kiwicorp.supersimplegymapp.ui.addeditroutine.ChooseActivityFragment"
             android:label="ChooseActivityFragment" />
+        <action
+            android:id="@+id/toAddEditActivityFragment"
+            app:destination="@id/addEditActivityFragment" />
     </navigation>
     <fragment
         android:id="@+id/chooseRoutineFragment"

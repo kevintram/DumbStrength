@@ -65,12 +65,12 @@ class ChooseActivityListAdapter(private val chooseActivityActions: ChooseActivit
 
         val items = mutableListOf<Item>()
 
-        var currLetter = if (activities[0].name[0].isDigit()) '1' else activities[0].name[0]
+        var currLetter = if (activities[0].name[0].isDigit()) '1' else activities[0].name[0].toUpperCase()
 
         items.add(Item.LetterHeaderItem(currLetter))
 
         for (activity in activities) {
-            val activityLetter = activity.name[0]
+            val activityLetter = activity.name[0].toUpperCase()
             if (activityLetter != currLetter) {
                 if (!(activityLetter.isDigit() && currLetter.isDigit())) { // don't add new header if both are digits
                     currLetter = activityLetter
