@@ -14,8 +14,12 @@ data class WorkoutWithEntries (
         entityColumn = "workout_entry_workout_creator_id",
         entity = WorkoutEntry::class
     )
-    val entries: List<WorkoutEntryWithActivity>
+    var entries: List<WorkoutEntryWithActivity>
 ) {
+    init {
+        entries.sortedBy { it.workoutEntry.index }
+    }
+
     val description: SpannableStringBuilder
         get() {
             val result = SpannableStringBuilder()

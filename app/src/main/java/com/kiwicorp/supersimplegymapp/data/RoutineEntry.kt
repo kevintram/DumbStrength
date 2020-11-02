@@ -30,6 +30,9 @@ data class RoutineEntry(
     @ColumnInfo(name = "routine_entry_routine_creator_id")
     val routineId: String,
 
+    @ColumnInfo(name = "routine_entry_index")
+    var index: Int,
+
     @ColumnInfo(name = "routine_entry_description")
     var description: String,
 

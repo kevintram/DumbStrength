@@ -33,6 +33,9 @@ data class WorkoutEntry(
     @ColumnInfo(name = "workout_entry_workout_creator_id")
     val workoutId: String,
 
+    @ColumnInfo(name = "workout_entry_index")
+    var index: Int,
+
     @ColumnInfo(name = "workout_entry_description")
     var description: String,
 

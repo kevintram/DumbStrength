@@ -95,7 +95,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
     }
 
     override fun chooseActivity(activity: Activity) {
-        val entry = RoutineEntry(activity.id,routineId,"")
+        val entry = RoutineEntry(activity.id,routineId,entries.value!!.size,"")
         val entryWithActivity = RoutineEntryWithActivity(entry,activity)
         _entries.value = _entries.value!!.plusElement(entryWithActivity)
     }
@@ -114,6 +114,20 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
             }
         }
         return false
+    }
+
+    fun swapActivities(index: Int, targetIndex: Int) {
+        val entries = entries.value!!.toMutableList()
+
+        val temp = entries[index]
+        entries[index] = entries[targetIndex]
+        entries[targetIndex] = temp
+
+        for (i in entries.indices) {
+            entries[i].routineEntry.index = i
+        }
+
+        _entries.value = entries
     }
 
     fun navigateToChooseActivityFragment() {

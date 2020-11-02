@@ -55,7 +55,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
                val activity = entryWithActivity.activity
                val entry = entryWithActivity.routineEntry
 
-               val workoutEntry = WorkoutEntry(entry.activityId,workoutId,entry.description,date.value!!)
+               val workoutEntry = WorkoutEntry(entry.activityId,workoutId,entry.index,entry.description,date.value!!)
                _entries.value = entries.value!!.plus(WorkoutEntryWithActivity(workoutEntry,activity))
            }
         }
@@ -115,7 +115,7 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     }
 
     override fun chooseActivity(activity: Activity) {
-        val entry = WorkoutEntry(activity.id,workoutId,"", date.value!!)
+        val entry = WorkoutEntry(activity.id,workoutId, entries.value!!.size,"", date.value!!)
         val entryWithActivity = WorkoutEntryWithActivity(entry, activity)
         _entries.value = _entries.value!!.plusElement(entryWithActivity)
     }
@@ -134,6 +134,20 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             }
         }
         return false
+    }
+
+    fun swapActivities(index: Int, targetIndex: Int) {
+        val entries = entries.value!!.toMutableList()
+
+        val temp = entries[index]
+        entries[index] = entries[targetIndex]
+        entries[targetIndex] = temp
+
+        for (i in entries.indices) {
+            entries[i].workoutEntry.index = i
+        }
+
+        _entries.value = entries
     }
 
     fun navigateToChooseActivityFragment() {
