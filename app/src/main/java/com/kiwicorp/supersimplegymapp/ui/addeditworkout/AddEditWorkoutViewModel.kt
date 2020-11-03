@@ -122,9 +122,14 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
 
     override fun unchooseActivity(activity: Activity) {
         // drop entries with the same activity (for some reason dropWhile() will not work)
-        _entries.value = _entries.value!!.filter {
+        val newEntries = entries.value!!.filter {
             it.activity.id != activity.id
         }
+        //update indices
+        for (i in newEntries.indices) {
+            newEntries[i].workoutEntry.index = i
+        }
+        _entries.value = newEntries
     }
 
     override fun activityIsInEntries(activity: Activity): Boolean {
@@ -136,16 +141,15 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
         return false
     }
 
-    fun swapActivities(index: Int, targetIndex: Int) {
+    fun swapEntries(index: Int, targetIndex: Int) {
         val entries = entries.value!!.toMutableList()
 
         val temp = entries[index]
         entries[index] = entries[targetIndex]
         entries[targetIndex] = temp
 
-        for (i in entries.indices) {
-            entries[i].workoutEntry.index = i
-        }
+        entries[index].workoutEntry.index = index
+        entries[targetIndex].workoutEntry.index = targetIndex
 
         _entries.value = entries
     }

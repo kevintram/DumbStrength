@@ -23,6 +23,8 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
 
     val name = MutableLiveData("Routine #${routineRepository.routines.value?.size?.plus(1) ?: 1}")
 
+    private var index = routineRepository.routines.value?.size ?: 0
+
     private val _navigateToChooseActivityFragment = MutableLiveData<Event<Unit>>()
     val navigateToChooseActivityFragment: LiveData<Event<Unit>> = _navigateToChooseActivityFragment
 
@@ -36,6 +38,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             val routineWithEntries = routineRepository.getRoutineWithEntriesById(routineId)
             name.value = routineWithEntries.routine.name
+            index = routineWithEntries.routine.index
             this@AddEditRoutineViewModel.routineId = routineId
             _entries.value = routineWithEntries.entries
         }
@@ -43,7 +46,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
 
     fun insertRoutineAndClose() {
         viewModelScope.launch {
-            val routine = Routine(name.value!!, routineId)
+            val routine = Routine(name.value!!,index, routineId)
             routineRepository.insertRoutine(routine)
 
             for (entryWithActivity in entries.value!!) {
@@ -56,7 +59,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
 
     fun deleteRoutineAndClose() {
         viewModelScope.launch {
-            val routine = Routine(name.value!!, routineId)
+            val routine = Routine(name.value!!, index, routineId)
             routineRepository.deleteRoutine(routine)
             // entries don't need to be deleted here because workout is a foreign key in RoutineEntry
             close()
@@ -65,7 +68,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
 
     fun updateRoutineAndClose() {
         viewModelScope.launch {
-            val routine = Routine(name.value!!,routineId)
+            val routine = Routine(name.value!!,index,routineId)
             routineRepository.updateRoutine(routine)
 
             val prevEntries = routineRepository.getEntriesByRoutineId(routineId)
@@ -102,9 +105,14 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
 
     override fun unchooseActivity(activity: Activity) {
         // drop entries with the same activity (for some reason dropWhile() will not work)
-        _entries.value = _entries.value!!.filter {
+        val newEntries = entries.value!!.filter {
             it.activity.id != activity.id
         }
+        //update indices
+        for (i in newEntries.indices) {
+            newEntries[i].routineEntry.index = i
+        }
+        _entries.value = newEntries
     }
 
     override fun activityIsInEntries(activity: Activity): Boolean {
@@ -116,16 +124,15 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
         return false
     }
 
-    fun swapActivities(index: Int, targetIndex: Int) {
+    fun swapEntries(index: Int, targetIndex: Int) {
         val entries = entries.value!!.toMutableList()
-
+        //swap
         val temp = entries[index]
         entries[index] = entries[targetIndex]
         entries[targetIndex] = temp
-
-        for (i in entries.indices) {
-            entries[i].routineEntry.index = i
-        }
+        //update indices
+        entries[index].routineEntry.index = index
+        entries[targetIndex].routineEntry.index = index
 
         _entries.value = entries
     }

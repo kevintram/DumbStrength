@@ -77,7 +77,7 @@ class AddEditRoutineFragment : Fragment() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                viewModel.swapActivities(viewHolder.adapterPosition, target.adapterPosition)
+                viewModel.swapEntries(viewHolder.adapterPosition, target.adapterPosition)
                 return true
             }
 
