@@ -16,10 +16,6 @@ data class WorkoutWithEntries (
     )
     var entries: List<WorkoutEntryWithActivity>
 ) {
-    init {
-        entries.sortedBy { it.workoutEntry.index }
-    }
-
     val description: SpannableStringBuilder
         get() {
             val result = SpannableStringBuilder()

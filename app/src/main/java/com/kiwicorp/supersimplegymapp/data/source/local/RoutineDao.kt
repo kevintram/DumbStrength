@@ -8,11 +8,11 @@ import com.kiwicorp.supersimplegymapp.data.RoutineWithEntries
 @Dao
 interface RoutineDao {
     @Transaction
-    @Query("SELECT * FROM routines")
+    @Query("SELECT * FROM routines ORDER BY routine_index")
     fun observeRoutines(): LiveData<List<RoutineWithEntries>>
 
     @Transaction
-    @Query("SELECT * FROM routines")
+    @Query("SELECT * FROM routines ORDER BY routine_index")
     suspend fun getRoutines(): List<RoutineWithEntries>
 
     @Query("SELECT * FROM routines WHERE routine_id = :routineId")

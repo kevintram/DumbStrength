@@ -1,18 +1,24 @@
 package com.kiwicorp.supersimplegymapp.ui.routines
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.kiwicorp.supersimplegymapp.Event
 import com.kiwicorp.supersimplegymapp.data.Routine
+import com.kiwicorp.supersimplegymapp.data.RoutineWithEntries
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.ui.routinecommon.RoutinesListAdapter
+import kotlinx.coroutines.launch
 
 class RoutinesViewModel @ViewModelInject constructor(
     private val routineRepository: RoutineRepository
 ): ViewModel(), RoutinesListAdapter.OnRoutineClickListener {
-    val routines = routineRepository.routines
+    // use MediatorLiveData that subscribes to routineRepository.routines so swapping routines
+    // doesn't cause flickering
+    val routines = MediatorLiveData<List<RoutineWithEntries>>().apply {
+        addSource(routineRepository.routines) {
+            value = it
+        }
+    }
 
     private val _navigateToAddRoutineFragment = MutableLiveData<Event<Unit>>()
     val navigateToAddRoutineFragment: LiveData<Event<Unit>> = _navigateToAddRoutineFragment
@@ -26,6 +32,28 @@ class RoutinesViewModel @ViewModelInject constructor(
 
     fun navigateToEditRoutineFragment(routineId: String) {
         _navigateToEditRoutineFragment.value = Event(routineId)
+    }
+
+    fun swapRoutines(index: Int, targetIndex: Int) {
+        val newRoutines = routines.value!!.toMutableList()
+
+        val routineWithEntries = newRoutines[index]
+        val target = newRoutines[targetIndex]
+        // swap
+        newRoutines[index] = target
+        newRoutines[targetIndex] = routineWithEntries
+        // update index
+        routineWithEntries.routine.index = targetIndex
+        target.routine.index = index
+        // update list
+        routines.value = newRoutines
+        // update in database
+        viewModelScope.launch {
+            routineRepository.updateRoutine(routineWithEntries.routine)
+        }
+        viewModelScope.launch {
+            routineRepository.updateRoutine(target.routine)
+        }
     }
 
     override fun onRoutineClick(routine: Routine) {

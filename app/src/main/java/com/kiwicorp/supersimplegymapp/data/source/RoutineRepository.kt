@@ -39,9 +39,17 @@ class RoutineRepository @Inject constructor(
       }
    }
 
-   suspend fun deleteRoutine(routine: Routine): Int {
-      return withContext(Dispatchers.IO) {
+   suspend fun deleteRoutine(routine: Routine) {
+      withContext(Dispatchers.IO) {
          routineDao.deleteRoutine(routine)
+
+         val routines = routineDao.getRoutines()
+         //update indices
+         for (i in routines.indices) {
+            val it = routines[i].routine
+            it.index = i
+            updateRoutine(it)
+         }
       }
    }
 
