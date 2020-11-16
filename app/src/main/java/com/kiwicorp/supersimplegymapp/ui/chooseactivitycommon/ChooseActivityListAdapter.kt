@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 const val ITEM_ACTIVITY_VIEW_TYPE = 0
 const val ITEM_LETTER_HEADER_VIEW_TYPE = 1
@@ -88,19 +89,17 @@ class ChooseActivityListAdapter(private val chooseActivityActions: ChooseActivit
             binding.activity = activity
 
             binding.layout.setOnClickListener {
-                binding.checkbox.isChecked = !binding.checkbox.isChecked
-            }
-
-            binding.checkbox.isChecked = chooseActivityActions.activityIsInEntries(activity)
-
-            binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    chooseActivityActions.chooseActivity(activity)
-                } else {
-                    chooseActivityActions.unchooseActivity(activity)
+                with(binding.checkbox) {
+                    isChecked = !isChecked
+                    if (isChecked) {
+                        chooseActivityActions.chooseActivity(activity)
+                    } else {
+                        chooseActivityActions.unchooseActivity(activity)
+                    }
                 }
             }
 
+            binding.checkbox.isChecked = chooseActivityActions.activityIsInEntries(activity)
         }
 
         companion object {
