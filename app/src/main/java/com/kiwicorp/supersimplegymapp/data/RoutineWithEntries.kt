@@ -1,7 +1,5 @@
 package com.kiwicorp.supersimplegymapp.data
 
-import android.text.SpannableStringBuilder
-import androidx.core.text.bold
 import androidx.room.Embedded
 import androidx.room.Relation
 
@@ -15,18 +13,12 @@ data class RoutineWithEntries(
     )
     val entries: List<RoutineEntryWithActivity>
 ) {
-    val description: SpannableStringBuilder
+    val description: String
         get() {
-            val result = SpannableStringBuilder()
+            var result = ""
             for (entryWithActivity in entries) {
-                result.bold { appendln(entryWithActivity.activity.name) }
-                if (entryWithActivity.routineEntry.description != "") {
-                    result.appendln(entryWithActivity.routineEntry.description)
-                }
+                result += "${entryWithActivity.activity.name}\n"
             }
-            if (result.isNotEmpty()) {
-                result.delete(result.length - 1,result.length)
-            }
-            return result
+            return if (result.isNotEmpty()) result.dropLast(1) else result
         }
 }

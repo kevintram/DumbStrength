@@ -10,6 +10,7 @@ import com.kiwicorp.supersimplegymapp.data.*
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon.ChooseActivityListAdapter
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 
 class AddEditRoutineViewModel @ViewModelInject constructor(
@@ -104,10 +105,7 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
     }
 
     override fun unchooseActivity(activity: Activity) {
-        // drop entries with the same activity (for some reason dropWhile() will not work)
-        val newEntries = entries.value!!.filter {
-            it.activity.id != activity.id
-        }
+        val newEntries = entries.value!!.dropWhile { it.activity.id == activity.id }
         //update indices
         for (i in newEntries.indices) {
             newEntries[i].routineEntry.index = i
