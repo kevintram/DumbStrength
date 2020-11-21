@@ -2,6 +2,7 @@ package com.kiwicorp.supersimplegymapp.ui.chooseactivitycommon
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -91,15 +92,27 @@ class ChooseActivityListAdapter(private val chooseActivityActions: ChooseActivit
             binding.layout.setOnClickListener {
                 with(binding.checkbox) {
                     isChecked = !isChecked
-                    if (isChecked) {
-                        chooseActivityActions.chooseActivity(activity)
-                    } else {
-                        chooseActivityActions.unchooseActivity(activity)
-                    }
+                    onCheckedChanged(isChecked, activity, chooseActivityActions)
                 }
             }
 
+            binding.checkbox.setOnClickListener {
+                onCheckedChanged((it as CheckBox).isChecked, activity, chooseActivityActions)
+            }
+
             binding.checkbox.isChecked = chooseActivityActions.activityIsInEntries(activity)
+        }
+
+        private fun onCheckedChanged(
+            isChecked : Boolean,
+            activity: Activity,
+            chooseActivityActions: ChooseActivityActions
+        ) {
+            if (isChecked) {
+                chooseActivityActions.chooseActivity(activity)
+            } else {
+                chooseActivityActions.unchooseActivity(activity)
+            }
         }
 
         companion object {
