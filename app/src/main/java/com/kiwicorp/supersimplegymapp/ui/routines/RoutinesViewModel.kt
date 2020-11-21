@@ -15,8 +15,11 @@ class RoutinesViewModel @ViewModelInject constructor(
     // use MediatorLiveData that subscribes to routineRepository.routines so swapping routines
     // doesn't cause flickering
     val routines = MediatorLiveData<List<RoutineWithEntries>>().apply {
-        addSource(routineRepository.routines) {
-            value = it
+        addSource(routineRepository.routines) { list ->
+            // sort here because if routines are reordered and the user navigates away and back,
+            // dao will initially return a list with the old ordering and then a list with the
+            // correct ordering causing the recycler view to show a reordering animation
+            value = list.sortedBy { it.routine.index }
         }
     }
 
@@ -39,20 +42,26 @@ class RoutinesViewModel @ViewModelInject constructor(
 
         val routineWithEntries = newRoutines[index]
         val target = newRoutines[targetIndex]
-        // swap
+
         newRoutines[index] = target
         newRoutines[targetIndex] = routineWithEntries
-        // update index
+
         routineWithEntries.routine.index = targetIndex
         target.routine.index = index
-        // update list
+
         routines.value = newRoutines
-        // update in database
+    }
+
+    /**
+     * Updates the order of the routine in case the routines have been reordered.
+     */
+    fun updateRoutineOrder() {
         viewModelScope.launch {
-            routineRepository.updateRoutine(routineWithEntries.routine)
-        }
-        viewModelScope.launch {
-            routineRepository.updateRoutine(target.routine)
+            routines.value?.let{
+                for (routineWithEntries in it) {
+                    routineRepository.updateRoutine(routineWithEntries.routine)
+                }
+            }
         }
     }
 

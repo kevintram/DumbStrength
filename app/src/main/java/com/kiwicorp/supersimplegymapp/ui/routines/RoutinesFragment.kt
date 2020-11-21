@@ -47,6 +47,11 @@ class RoutinesFragment : Fragment() {
         setupNavigation()
     }
 
+    override fun onPause() {
+        viewModel.updateRoutineOrder()
+        super.onPause()
+    }
+
     private fun setupRecyclerView() {
         adapter = RoutinesListAdapter(viewModel)
         binding.routineRecyclerView.adapter = adapter
