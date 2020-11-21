@@ -34,6 +34,8 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val _close = MutableLiveData<Event<Unit>>()
     val close: LiveData<Event<Unit>> = _close
 
+    private var routineLoaded = false
+
     fun loadWorkout(workoutId: String) {
         // stop if workout already loaded (needed because all changes will be undone when navigating
         // from ChooseActivityFragment to AddEditWorkoutFragment)
@@ -49,14 +51,19 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
     }
 
     fun loadRoutine(routineId: String) {
+        // needed because the activities of the routine will constantly be added when navigating
+        // from ChooseActivityFragment to AddEditWorkoutFragment
+        if (routineLoaded) return
         viewModelScope.launch {
             val routine = routineRepository.getRoutineWithEntriesById(routineId)
             for (entryWithActivity in routine.entries) {
-               val activity = entryWithActivity.activity
-               val entry = entryWithActivity.routineEntry
+                val activity = entryWithActivity.activity
+                val entry = entryWithActivity.routineEntry
 
-               val workoutEntry = WorkoutEntry(entry.activityId,workoutId,entry.index,entry.description,date.value!!)
-               _entries.value = entries.value!!.plus(WorkoutEntryWithActivity(workoutEntry,activity))
+                val workoutEntry = WorkoutEntry(entry.activityId,workoutId,entry.index,entry.description,date.value!!)
+                _entries.value = entries.value!!.plus(WorkoutEntryWithActivity(workoutEntry,activity))
+
+                routineLoaded = true
            }
         }
     }
