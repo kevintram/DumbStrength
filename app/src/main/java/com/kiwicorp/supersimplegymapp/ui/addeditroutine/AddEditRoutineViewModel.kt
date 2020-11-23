@@ -105,7 +105,10 @@ class AddEditRoutineViewModel @ViewModelInject constructor(
     }
 
     override fun unchooseActivity(activity: Activity) {
-        val newEntries = entries.value!!.dropWhile { it.activity.id == activity.id }
+        // drop entries with the same activity (for some reason dropWhile() will not work)
+        val newEntries = entries.value!!.filter {
+            it.activity.id != activity.id
+        }
         //update indices
         for (i in newEntries.indices) {
             newEntries[i].routineEntry.index = i
