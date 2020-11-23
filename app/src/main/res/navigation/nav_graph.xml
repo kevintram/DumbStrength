@@ -27,10 +27,16 @@
     </fragment>
     <action
         android:id="@+id/toActivitiesFragment"
-        app:destination="@id/activitiesFragment" />
+        app:destination="@id/activitiesFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
     <action
         android:id="@+id/toWorkoutsFragment"
-        app:destination="@id/workoutsFragment" />
+        app:destination="@id/workoutsFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
     <dialog
         android:id="@+id/addEditActivityFragment"
         android:name="com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment"
@@ -104,7 +110,10 @@
     </fragment>
     <action
         android:id="@+id/toRoutinesFragment"
-        app:destination="@id/routinesFragment" />
+        app:destination="@id/routinesFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
     <navigation android:id="@+id/addEditRoutineGraph"
         app:startDestination="@id/addEditRoutineFragment">
         <argument
