@@ -16,6 +16,12 @@ class WorkoutRepository @Inject constructor(
 ) {
     val workouts = workoutDao.observerWorkouts()
 
+    suspend fun getWorkouts(): List<WorkoutWithEntries> {
+        return withContext(Dispatchers.IO) {
+            workoutDao.getWorkouts()
+        }
+    }
+
     suspend fun getWorkout(workoutId: String): WorkoutWithEntries {
         return withContext(Dispatchers.IO) {
             workoutDao.getWorkout(workoutId)

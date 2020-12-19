@@ -93,4 +93,7 @@ dependencies {
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Calendar View
+    implementation 'com.github.kizitonwose:CalendarView:1.0.0'
 }

@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.kiwicorp.supersimplegymapp.EventObserver
+import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentWorkoutsBinding
-import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment
 import com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragmentDirections.Companion.toAddEditWorkoutGraph
 import com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragmentDirections.Companion.toChooseRoutineFragment
+import com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragmentDirections.Companion.toWorkoutCalendarFragment
 import com.kiwicorp.supersimplegymapp.util.Mode
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class WorkoutsFragment: Fragment() {
@@ -23,7 +25,7 @@ class WorkoutsFragment: Fragment() {
 
     private lateinit var adapter: WorkoutsListAdapter
 
-    private val viewModel: WorkoutsViewModel by viewModels()
+    private val viewModel: WorkoutsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,16 +42,19 @@ class WorkoutsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        binding.toolbar.setOnMenuItemClickListener {
+            return@setOnMenuItemClickListener if (it.itemId == R.id.menu_item_workout_calendar) {
+                viewModel.navigateToWorkoutCalendarFragment()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.navigateToChooseRoutineFragment.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(toChooseRoutineFragment())
-        })
-        viewModel.navigateToEditWorkoutFragment.observe(viewLifecycleOwner, EventObserver { workoutId ->
-            findNavController().navigate(toAddEditWorkoutGraph(Mode.EDIT,workoutId, null))
-        })
+        setupNavigation()
     }
 
     private fun setupRecyclerView() {
@@ -57,6 +62,23 @@ class WorkoutsFragment: Fragment() {
         binding.workoutsRecyclerView.adapter = adapter
         viewModel.workouts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+        })
+        viewModel.scrollToDate.observe(viewLifecycleOwner, EventObserver { date ->
+            binding.workoutsRecyclerView.layoutManager?.scrollToPosition(
+                adapter.currentList.indexOfFirst { it.workout.date == date }
+            )
+        })
+    }
+
+    private fun setupNavigation() {
+        viewModel.navigateToChooseRoutineFragment.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(toChooseRoutineFragment())
+        })
+        viewModel.navigateToEditWorkoutFragment.observe(viewLifecycleOwner, EventObserver { workoutId ->
+            findNavController().navigate(toAddEditWorkoutGraph(Mode.EDIT,workoutId, null))
+        })
+        viewModel.navigateToWorkoutCalendarFragment.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigate(toWorkoutCalendarFragment())
         })
     }
 }

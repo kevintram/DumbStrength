@@ -24,6 +24,9 @@
         <action
             android:id="@+id/toChooseRoutineFragment"
             app:destination="@id/chooseRoutineFragment" />
+        <action
+            android:id="@+id/toWorkoutCalendarFragment"
+            app:destination="@id/workoutCalendarFragment" />
     </fragment>
     <action
         android:id="@+id/toActivitiesFragment"
@@ -154,4 +157,8 @@
             android:id="@+id/toAddEditWorkoutGraph"
             app:destination="@id/addEditWorkoutGraph" />
     </fragment>
+    <fragment
+        android:id="@+id/workoutCalendarFragment"
+        android:name="com.kiwicorp.supersimplegymapp.ui.workoutcalendar.WorkoutCalendarFragment"
+        android:label="WorkoutCalendarFragment" />
 </navigation>
