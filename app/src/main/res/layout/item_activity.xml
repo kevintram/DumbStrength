@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginHorizontal="@dimen/margin_normal"
+            android:singleLine="true"
             android:textAppearance="?textAppearanceBody1"
             android:visibility="@{(activity.description != null)? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toBottomOf="@+id/name_text"

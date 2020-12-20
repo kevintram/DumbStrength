@@ -44,6 +44,7 @@
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_normal"
             android:textAppearance="?textAppearanceBody1"
+            android:singleLine="true"
             android:visibility="@{(activity.description != null)? View.VISIBLE : View.GONE}"
             app:layout_constraintTop_toBottomOf="@+id/name_text"
             app:layout_constraintStart_toEndOf="@id/checkbox"
