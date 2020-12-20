@@ -54,7 +54,10 @@ class ActivityDetailFragment: Fragment() {
     private fun setupRecyclerView() {
         binding.entryHistoryRecyclerView.adapter = adapter
         viewModel.entries.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
+            adapter.addHeaderAndSubmitList(it,viewModel.activity.value)
+        })
+        viewModel.activity.observe(viewLifecycleOwner, Observer {
+            adapter.addHeaderAndSubmitList(viewModel.entries.value,it)
         })
     }
 
