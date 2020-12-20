@@ -7,7 +7,9 @@ import com.kiwicorp.supersimplegymapp.data.Routine
 import com.kiwicorp.supersimplegymapp.data.RoutineWithEntries
 import com.kiwicorp.supersimplegymapp.data.source.RoutineRepository
 import com.kiwicorp.supersimplegymapp.ui.routinecommon.RoutinesListAdapter
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class RoutinesViewModel @ViewModelInject constructor(
     private val routineRepository: RoutineRepository
@@ -53,12 +55,12 @@ class RoutinesViewModel @ViewModelInject constructor(
     }
 
     /**
-     * Updates the order of the routine in case the routines have been reordered.
+     * Updates the order of the routines.
      */
     fun updateRoutineOrder() {
-        viewModelScope.launch {
-            routines.value?.let{
-                for (routineWithEntries in it) {
+        routines.value?.let{
+            for (routineWithEntries in it) {
+                viewModelScope.launch {
                     routineRepository.updateRoutine(routineWithEntries.routine)
                 }
             }

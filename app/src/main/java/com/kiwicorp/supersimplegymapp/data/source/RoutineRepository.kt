@@ -6,6 +6,7 @@ import com.kiwicorp.supersimplegymapp.data.RoutineWithEntries
 import com.kiwicorp.supersimplegymapp.data.source.local.RoutineDao
 import com.kiwicorp.supersimplegymapp.data.source.local.RoutineEntryDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -34,7 +35,7 @@ class RoutineRepository @Inject constructor(
    }
 
    suspend fun updateRoutine(routine: Routine): Int {
-      return withContext(Dispatchers.IO) {
+      return withContext(Dispatchers.IO + NonCancellable) {
          routineDao.updateRoutine(routine)
       }
    }
