@@ -59,6 +59,7 @@
             android:textAppearance="?textAppearanceHeadline6"
             android:layout_margin="@dimen/margin_normal"
             app:layout_constraintTop_toBottomOf="@id/activity_description_text"
+            app:layout_constraintBottom_toTopOf="@id/entry_history_recycler_view"
             android:text="@string/history"/>
 
         <androidx.recyclerview.widget.RecyclerView
