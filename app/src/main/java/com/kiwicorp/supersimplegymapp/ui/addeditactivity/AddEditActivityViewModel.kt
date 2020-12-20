@@ -34,6 +34,9 @@ class AddEditActivityViewModel @ViewModelInject constructor(
 
     fun insertWorkoutAndClose() {
         viewModelScope.launch {
+            if (description.value == "") {
+                description.value = null
+            }
             val activity = Activity(name.value!!, description.value)
             activityRepository.insertActivity(activity)
             close()
@@ -42,6 +45,9 @@ class AddEditActivityViewModel @ViewModelInject constructor(
 
     fun updateWorkoutAndClose() {
         viewModelScope.launch {
+            if (description.value == "") {
+                description.value = null
+            }
             val activity = Activity(name.value!!, description.value, activityId!!)
             activityRepository.updateActivity(activity)
             close()
