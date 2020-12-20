@@ -60,7 +60,7 @@ class WorkoutCalendarFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.navigateToWorkoutsFragment.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigate(toWorkoutsFragment())
+            findNavController().navigateUp()
         })
     }
 

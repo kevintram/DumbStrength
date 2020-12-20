@@ -11,11 +11,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.kiwicorp.supersimplegymapp.AddEditRoutineGraphDirections.Companion.toRoutinesFragment
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentAddEditRoutineBinding
 import com.kiwicorp.supersimplegymapp.ui.addeditroutine.AddEditRoutineFragmentDirections.Companion.toChooseActivityFragment
+import com.kiwicorp.supersimplegymapp.ui.addeditroutine.AddEditRoutineFragmentDirections.Companion.toRoutinesFragment
 import com.kiwicorp.supersimplegymapp.util.Mode
 import com.kiwicorp.supersimplegymapp.util.closeKeyboard
 import dagger.hilt.android.AndroidEntryPoint

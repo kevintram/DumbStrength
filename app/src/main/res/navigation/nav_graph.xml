@@ -9,10 +9,18 @@
         android:label="ActivitiesFragment" >
         <action
             android:id="@+id/toAddEditActivityFragment"
-            app:destination="@id/addEditActivityFragment" />
+            app:destination="@id/addEditActivityFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/toActivityDetailFragment"
-            app:destination="@id/activityDetailFragment" />
+            app:destination="@id/activityDetailFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/workoutsFragment"
@@ -20,13 +28,25 @@
         android:label="WorkoutsFragment" >
         <action
             android:id="@+id/toAddEditWorkoutGraph"
-            app:destination="@id/addEditWorkoutGraph" />
+            app:destination="@id/addEditWorkoutGraph"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/toChooseRoutineFragment"
-            app:destination="@id/chooseRoutineFragment" />
+            app:destination="@id/chooseRoutineFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/toWorkoutCalendarFragment"
-            app:destination="@id/workoutCalendarFragment" />
+            app:destination="@id/workoutCalendarFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <action
         android:id="@+id/toActivitiesFragment"
@@ -71,7 +91,11 @@
             android:label="AddEditWorkoutFragment" >
             <action
                 android:id="@+id/toChooseActivityFragment"
-                app:destination="@id/chooseActivityFragment" />
+                app:destination="@id/chooseActivityFragment"
+                app:enterAnim="@anim/fragment_open_enter"
+                app:exitAnim="@anim/fragment_open_exit"
+                app:popEnterAnim="@anim/fragment_close_enter"
+                app:popExitAnim="@anim/fragment_close_exit" />
             <argument
                 android:name="mode"
                 app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
@@ -90,7 +114,19 @@
             android:label="ChooseActivityFragment" />
         <action
             android:id="@+id/toAddEditActivityFragment"
-            app:destination="@id/addEditActivityFragment" />
+            app:destination="@id/addEditActivityFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/toWorkoutsFragment"
+            app:destination="@id/workoutsFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </navigation>
     <fragment
         android:id="@+id/activityDetailFragment"
@@ -101,7 +137,11 @@
             app:argType="string" />
         <action
             android:id="@+id/toAddEditActivityFragment"
-            app:destination="@id/addEditActivityFragment" />
+            app:destination="@id/addEditActivityFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/routinesFragment"
@@ -109,7 +149,11 @@
         android:label="RoutinesFragment" >
         <action
             android:id="@+id/toAddEditRoutineGraph"
-            app:destination="@id/addEditRoutineGraph" />
+            app:destination="@id/addEditRoutineGraph"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <action
         android:id="@+id/toRoutinesFragment"
@@ -132,7 +176,11 @@
             android:label="AddEditRoutineFragment" >
             <action
                 android:id="@+id/toChooseActivityFragment"
-                app:destination="@id/chooseActivityFragment" />
+                app:destination="@id/chooseActivityFragment"
+                app:enterAnim="@anim/fragment_open_enter"
+                app:exitAnim="@anim/fragment_open_exit"
+                app:popEnterAnim="@anim/fragment_close_enter"
+                app:popExitAnim="@anim/fragment_close_exit" />
             <argument
                 android:name="mode"
                 app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
@@ -147,7 +195,14 @@
             android:label="ChooseActivityFragment" />
         <action
             android:id="@+id/toAddEditActivityFragment"
-            app:destination="@id/addEditActivityFragment" />
+            app:destination="@id/addEditActivityFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/toRoutinesFragment"
+            app:destination="@id/routinesFragment" />
     </navigation>
     <fragment
         android:id="@+id/chooseRoutineFragment"
@@ -155,7 +210,11 @@
         android:label="ChooseRoutineFragment" >
         <action
             android:id="@+id/toAddEditWorkoutGraph"
-            app:destination="@id/addEditWorkoutGraph" />
+            app:destination="@id/addEditWorkoutGraph"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/workoutCalendarFragment"

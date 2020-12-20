@@ -12,10 +12,10 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.supersimplegymapp.EventObserver
-import com.kiwicorp.supersimplegymapp.NavGraphDirections.Companion.toWorkoutsFragment
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentAddEditWorkoutBinding
 import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toChooseActivityFragment
+import com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toWorkoutsFragment
 import com.kiwicorp.supersimplegymapp.util.Mode
 import com.kiwicorp.supersimplegymapp.util.closeKeyboard
 import dagger.hilt.android.AndroidEntryPoint
