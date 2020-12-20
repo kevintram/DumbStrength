@@ -69,7 +69,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
     // Recycler View
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 

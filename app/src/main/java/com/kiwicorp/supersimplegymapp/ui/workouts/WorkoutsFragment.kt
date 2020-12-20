@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentWorkoutsBinding
@@ -59,6 +60,7 @@ class WorkoutsFragment: Fragment() {
 
     private fun setupRecyclerView() {
         adapter = WorkoutsListAdapter(viewModel)
+        adapter.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.workoutsRecyclerView.adapter = adapter
         viewModel.workouts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 import com.kiwicorp.supersimplegymapp.R
 import com.kiwicorp.supersimplegymapp.databinding.FragmentChooseActivityBinding
 import com.kiwicorp.supersimplegymapp.ui.addeditroutine.ChooseActivityFragmentDirections
@@ -52,6 +53,7 @@ class ChooseActivityFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = ChooseActivityListAdapter(viewModel)
+        adapter.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.activityRecyclerView.adapter = adapter
         searchViewModel.activities.observe(viewLifecycleOwner, Observer {
             adapter.addHeadersAndSubmitList(it)

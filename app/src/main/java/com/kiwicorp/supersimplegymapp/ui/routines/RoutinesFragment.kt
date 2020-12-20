@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 import com.kiwicorp.supersimplegymapp.EventObserver
 import com.kiwicorp.supersimplegymapp.databinding.FragmentRoutinesBinding
 import com.kiwicorp.supersimplegymapp.ui.routinecommon.RoutinesListAdapter
@@ -47,13 +48,14 @@ class RoutinesFragment : Fragment() {
         setupNavigation()
     }
 
-    override fun onPause() {
+    override fun onStop() {
         viewModel.updateRoutineOrder()
-        super.onPause()
+        super.onStop()
     }
 
     private fun setupRecyclerView() {
         adapter = RoutinesListAdapter(viewModel)
+        adapter.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.routineRecyclerView.adapter = adapter
         viewModel.routines.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
@@ -74,7 +76,7 @@ class RoutinesFragment : Fragment() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                viewModel.swapRoutines(viewHolder.adapterPosition, target.adapterPosition)
+                viewModel.swapRoutines(viewHolder.bindingAdapterPosition, target.bindingAdapterPosition)
                 return true
             }
 
