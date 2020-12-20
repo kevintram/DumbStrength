@@ -7,31 +7,43 @@
             name="routineWithEntries"
             type="com.kiwicorp.supersimplegymapp.data.RoutineWithEntries" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout"
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/stroke_color"
+        app:cardElevation="0dp">
 
-        <TextView
-            android:id="@+id/routine_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_normal"
-            android:textAppearance="?textAppearanceHeadline6"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@{routineWithEntries.routine.name}"
-            tools:text="Name" />
-        <TextView
-            android:id="@+id/description_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginHorizontal="@dimen/margin_normal"
-            android:textAppearance="?textAppearanceBody1"
-            app:layout_constraintTop_toBottomOf="@id/routine_name"
-            android:text="@{routineWithEntries.description}"
-            tools:text="Description" />
+            android:layout_marginVertical="@dimen/margin_normal">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/routine_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:textAppearance="?textAppearanceHeadline6"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{routineWithEntries.routine.name}"
+                tools:text="Name" />
+            <TextView
+                android:id="@+id/description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_small"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:textAppearance="?textAppearanceBody1"
+                app:layout_constraintTop_toBottomOf="@id/routine_name"
+                android:text="@{routineWithEntries.description}"
+                tools:text="Description" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>
