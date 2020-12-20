@@ -69,6 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_normal"
+                android:textAppearance="?textAppearanceBody1"
                 android:background="@android:color/transparent"
                 android:text="@{entryWithActivity.routineEntry.description}"
                 android:hint="@string/description" />
