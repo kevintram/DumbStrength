@@ -8,7 +8,7 @@
         <item name="colorPrimary">@color/kiwicorp_dark_yellow_700</item>
         <item name="colorPrimaryVariant">@color/kiwicorp_dark_yellow_700</item>
         <item name="colorSecondary">@color/kiwicorp_green_400</item>
-        <item name="colorSecondaryVariant">@color/kiwicorp_green_300</item>
+        <item name="colorSecondaryVariant">@color/kiwicorp_green_600</item>
 
         <item name="android:colorBackground">@color/white_50</item>
         <item name="colorSurface">@color/white_50</item>
