@@ -5,11 +5,11 @@
     <data>
         <variable
             name="activity"
-            type="com.kiwicorp.supersimplegymapp.data.Activity" />
+            type="com.kiwicorp.dumbstrength.data.Activity" />
 
         <variable
             name="viewModel"
-            type="com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesViewModel" />
+            type="com.kiwicorp.dumbstrength.ui.activites.ActivitiesViewModel" />
 
         <import type="android.view.View"/>
     </data>

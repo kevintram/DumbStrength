@@ -5,10 +5,10 @@
     <data>
         <variable
             name="entryWithActivity"
-            type="com.kiwicorp.supersimplegymapp.data.RoutineEntryWithActivity" />
+            type="com.kiwicorp.dumbstrength.data.RoutineEntryWithActivity" />
         <variable
             name="viewModel"
-            type="com.kiwicorp.supersimplegymapp.ui.addeditroutine.AddEditRoutineViewModel" />
+            type="com.kiwicorp.dumbstrength.ui.addeditroutine.AddEditRoutineViewModel" />
         <import type="android.view.View"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +62,7 @@
             android:layout_marginVertical="@dimen/margin_normal"
             app:layout_constraintTop_toBottomOf="@+id/activity_description_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/Widget.SuperSimpleGymApp.CardView">
+            style="@style/Widget.DumbStrength.CardView">
 
             <EditText
                 android:id="@+id/entry_description_text"

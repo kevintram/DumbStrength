@@ -1,22 +1,22 @@
 <resources>
     <!--Bottom Sheets-->
-    <style name="ThemeOverlay.SuperSimpleGymApp.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+    <style name="ThemeOverlay.DumbStrength.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="bottomSheetStyle">@style/Widget.SuperSimpleGymApp.BottomSheet.Modal</item>
+        <item name="bottomSheetStyle">@style/Widget.DumbStrength.BottomSheet.Modal</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
-    <style name="Widget.SuperSimpleGymApp.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+    <style name="Widget.DumbStrength.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
         <item name="shapeAppearanceOverlay">?attr/shapeAppearanceLargeComponent</item>
     </style>
 
-    <style name="Widget.SuperSimpleGymApp.Button.ImageButton" parent="@style/Widget.AppCompat.ImageButton">
+    <style name="Widget.DumbStrength.Button.ImageButton" parent="@style/Widget.AppCompat.ImageButton">
         <item name="backgroundTint">@android:color/transparent</item>
     </style>
 
-    <style name="Widget.SuperSimpleGymApp.CardView" parent="Widget.MaterialComponents.CardView">
+    <style name="Widget.DumbStrength.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">0dp</item>
         <item name="strokeWidth">1dp</item>
         <item name="strokeColor">@color/stroke_color</item>

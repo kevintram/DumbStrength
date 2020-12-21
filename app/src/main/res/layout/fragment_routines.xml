@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kiwicorp.supersimplegymapp.ui.routines.RoutinesViewModel" />
+            type="com.kiwicorp.dumbstrength.ui.routines.RoutinesViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

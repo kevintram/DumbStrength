@@ -16,9 +16,9 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--Final, top-level theme-->
-    <style name="Theme.SuperSimpleGymApp.DayNight" parent="Theme.SuperSimpleGymApp.Dark"/>
+    <style name="Theme.DumbStrength.DayNight" parent="Theme.DumbStrength.Dark"/>
 
-    <style name="Theme.SuperSimpleGymApp.Dark" parent="Theme.SuperSimpleGymApp">
+    <style name="Theme.DumbStrength.Dark" parent="Theme.DumbStrength">
         <!--Material color attributes (dark theme) -->
         <item name="colorPrimary">@color/kiwicorp_dark_yellow_700</item>
         <item name="colorPrimaryVariant">@color/kiwicorp_dark_yellow_800</item>

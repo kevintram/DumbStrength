@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SuperSimpleGymApp</string>
+    <string name="app_name">Dumb Strength</string>
     <string name="workouts">workouts</string>
     <string name="activities">activities</string>
     <string name="name">Name</string>

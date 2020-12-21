@@ -3,7 +3,7 @@
     <data>
         <variable
             name="activity"
-            type="com.kiwicorp.supersimplegymapp.data.Activity" />
+            type="com.kiwicorp.dumbstrength.data.Activity" />
         <import type="android.view.View"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

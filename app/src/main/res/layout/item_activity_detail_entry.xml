@@ -6,7 +6,7 @@
     <data>
         <variable
             name="entry"
-            type="com.kiwicorp.supersimplegymapp.data.WorkoutEntry" />
+            type="com.kiwicorp.dumbstrength.data.WorkoutEntry" />
     </data>
 
         <com.google.android.material.card.MaterialCardView
@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/margin_small"
-            style="@style/Widget.SuperSimpleGymApp.CardView">
+            style="@style/Widget.DumbStrength.CardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

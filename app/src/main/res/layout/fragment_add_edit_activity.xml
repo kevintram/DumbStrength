@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityViewModel" />
+            type="com.kiwicorp.dumbstrength.ui.addeditactivity.AddEditActivityViewModel" />
         <import type="android.view.View"/>
     </data>
     <LinearLayout

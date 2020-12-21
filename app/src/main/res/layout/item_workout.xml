@@ -5,18 +5,18 @@
     <data>
         <variable
             name="workoutWithEntries"
-            type="com.kiwicorp.supersimplegymapp.data.WorkoutWithEntries" />
+            type="com.kiwicorp.dumbstrength.data.WorkoutWithEntries" />
 
         <variable
             name="viewModel"
-            type="com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsViewModel" />
+            type="com.kiwicorp.dumbstrength.ui.workouts.WorkoutsViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        style="@style/Widget.SuperSimpleGymApp.CardView">
+        style="@style/Widget.DumbStrength.CardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

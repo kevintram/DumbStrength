@@ -19,24 +19,24 @@
     <!--and cornerSizeBottomRight.-->
 
     <!--Shape Appearance for small components like chips, buttons, text fields and FABs-->
-    <style name="ShapeAppearance.SuperSimpleGymApp.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="ShapeAppearance.DumbStrength.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
     </style>
 
     <!--Shape Appearance for medium components like cards, alert dialogs-->
-    <style name="ShapeAppearance.SuperSimpleGymApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <style name="ShapeAppearance.DumbStrength.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/superSimpleGymApp_medium_component_corner_radius</item>
+        <item name="cornerSize">@dimen/dumbStrength_medium_component_corner_radius</item>
     </style>
 
     <!--Shape Appearance for large components like side and bottom navigation drawers-->
-    <style name="ShapeAppearance.SuperSimpleGymApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+    <style name="ShapeAppearance.DumbStrength.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/superSimpleGymApp_large_component_corner_radius</item>
-        <item name="cornerSizeTopRight">@dimen/superSimpleGymApp_large_component_corner_radius</item>
+        <item name="cornerSizeTopLeft">@dimen/dmbStrength_large_component_corner_radius</item>
+        <item name="cornerSizeTopRight">@dimen/dmbStrength_large_component_corner_radius</item>
     </style>
 
-    <dimen name="superSimpleGymApp_small_component_corner_radius">24dp</dimen>
-    <dimen name="superSimpleGymApp_medium_component_corner_radius">12dp</dimen>
-    <dimen name="superSimpleGymApp_large_component_corner_radius">12dp</dimen>
+    <dimen name="dumbStrength_small_component_corner_radius">24dp</dimen>
+    <dimen name="dumbStrength_medium_component_corner_radius">12dp</dimen>
+    <dimen name="dmbStrength_large_component_corner_radius">12dp</dimen>
 
 </resources>

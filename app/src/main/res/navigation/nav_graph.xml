@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/activitiesFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.activites.ActivitiesFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.activites.ActivitiesFragment"
         android:label="ActivitiesFragment" >
         <action
             android:id="@+id/toAddEditActivityFragment"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/workoutsFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.workouts.WorkoutsFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.workouts.WorkoutsFragment"
         android:label="WorkoutsFragment" >
         <action
             android:id="@+id/toAddEditWorkoutGraph"
@@ -62,11 +62,11 @@
         app:popUpToInclusive="true" />
     <dialog
         android:id="@+id/addEditActivityFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.addeditactivity.AddEditActivityFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.addeditactivity.AddEditActivityFragment"
         android:label="AddEditActivityFragment" >
         <argument
             android:name="mode"
-            app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
+            app:argType="com.kiwicorp.dumbstrength.util.Mode" />
         <argument
             android:name="activityId"
             app:argType="string"
@@ -76,7 +76,7 @@
         app:startDestination="@id/addEditWorkoutFragment">
         <argument
             android:name="mode"
-            app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
+            app:argType="com.kiwicorp.dumbstrength.util.Mode" />
         <argument
             android:name="workoutId"
             app:argType="string"
@@ -87,7 +87,7 @@
             app:nullable="true" />
         <fragment
             android:id="@+id/addEditWorkoutFragment"
-            android:name="com.kiwicorp.supersimplegymapp.ui.addeditworkout.AddEditWorkoutFragment"
+            android:name="com.kiwicorp.dumbstrength.ui.addeditworkout.AddEditWorkoutFragment"
             android:label="AddEditWorkoutFragment" >
             <action
                 android:id="@+id/toChooseActivityFragment"
@@ -98,7 +98,7 @@
                 app:popExitAnim="@anim/fragment_close_exit" />
             <argument
                 android:name="mode"
-                app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
+                app:argType="com.kiwicorp.dumbstrength.util.Mode" />
             <argument
                 android:name="workoutId"
                 app:argType="string"
@@ -110,7 +110,7 @@
         </fragment>
         <fragment
             android:id="@+id/chooseActivityFragment"
-            android:name="com.kiwicorp.supersimplegymapp.ui.addeditworkout.ChooseActivityFragment"
+            android:name="com.kiwicorp.dumbstrength.ui.addeditworkout.ChooseActivityFragment"
             android:label="ChooseActivityFragment" />
         <action
             android:id="@+id/toAddEditActivityFragment"
@@ -130,7 +130,7 @@
     </navigation>
     <fragment
         android:id="@+id/activityDetailFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.activitydetail.ActivityDetailFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.activitydetail.ActivityDetailFragment"
         android:label="ActivityDetailFragment" >
         <argument
             android:name="activityId"
@@ -145,7 +145,7 @@
     </fragment>
     <fragment
         android:id="@+id/routinesFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.routines.RoutinesFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.routines.RoutinesFragment"
         android:label="RoutinesFragment" >
         <action
             android:id="@+id/toAddEditRoutineGraph"
@@ -165,14 +165,14 @@
         app:startDestination="@id/addEditRoutineFragment">
         <argument
             android:name="mode"
-            app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
+            app:argType="com.kiwicorp.dumbstrength.util.Mode" />
         <argument
             android:name="routineId"
             app:argType="string"
             app:nullable="true"/>
         <fragment
             android:id="@+id/addEditRoutineFragment"
-            android:name="com.kiwicorp.supersimplegymapp.ui.addeditroutine.AddEditRoutineFragment"
+            android:name="com.kiwicorp.dumbstrength.ui.addeditroutine.AddEditRoutineFragment"
             android:label="AddEditRoutineFragment" >
             <action
                 android:id="@+id/toChooseActivityFragment"
@@ -183,7 +183,7 @@
                 app:popExitAnim="@anim/fragment_close_exit" />
             <argument
                 android:name="mode"
-                app:argType="com.kiwicorp.supersimplegymapp.util.Mode" />
+                app:argType="com.kiwicorp.dumbstrength.util.Mode" />
             <argument
                 android:name="routineId"
                 app:argType="string"
@@ -191,7 +191,7 @@
         </fragment>
         <fragment
             android:id="@+id/chooseActivityFragment"
-            android:name="com.kiwicorp.supersimplegymapp.ui.addeditroutine.ChooseActivityFragment"
+            android:name="com.kiwicorp.dumbstrength.ui.addeditroutine.ChooseActivityFragment"
             android:label="ChooseActivityFragment" />
         <action
             android:id="@+id/toAddEditActivityFragment"
@@ -206,7 +206,7 @@
     </navigation>
     <fragment
         android:id="@+id/chooseRoutineFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.chooseroutine.ChooseRoutineFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.chooseroutine.ChooseRoutineFragment"
         android:label="ChooseRoutineFragment" >
         <action
             android:id="@+id/toAddEditWorkoutGraph"
@@ -218,6 +218,6 @@
     </fragment>
     <fragment
         android:id="@+id/workoutCalendarFragment"
-        android:name="com.kiwicorp.supersimplegymapp.ui.workoutcalendar.WorkoutCalendarFragment"
+        android:name="com.kiwicorp.dumbstrength.ui.workoutcalendar.WorkoutCalendarFragment"
         android:label="WorkoutCalendarFragment" />
 </navigation>

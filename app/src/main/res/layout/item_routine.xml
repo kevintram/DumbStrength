@@ -5,14 +5,14 @@
     <data>
         <variable
             name="routineWithEntries"
-            type="com.kiwicorp.supersimplegymapp.data.RoutineWithEntries" />
+            type="com.kiwicorp.dumbstrength.data.RoutineWithEntries" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
-        style="@style/Widget.SuperSimpleGymApp.CardView">
+        style="@style/Widget.DumbStrength.CardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout"
