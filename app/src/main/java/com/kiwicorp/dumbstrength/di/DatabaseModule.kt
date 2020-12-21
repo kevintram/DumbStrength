@@ -38,10 +38,9 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): DumbStrengthDatabase{
-        return Room.databaseBuilder(
-            context.applicationContext,
-            DumbStrengthDatabase::class.java,
-            "Main.db"
-        ).build()
+        return Room.databaseBuilder(context.applicationContext, DumbStrengthDatabase::class.java,
+            "Main.db")
+            .createFromAsset("Main.db")
+            .build()
     }
 }
