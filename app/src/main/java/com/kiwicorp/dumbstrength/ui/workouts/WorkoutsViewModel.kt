@@ -11,9 +11,11 @@ class WorkoutsViewModel @ViewModelInject constructor(
 ): ViewModel() {
     val workouts = workoutRepository.workouts
 
-    val workoutsGroupedByDate = Transformations.map(workoutRepository.workouts) { workouts ->
+    val workoutsGroupedByDate = Transformations.map(workouts) { workouts ->
         workouts.groupBy { it.workout.date }
     }
+
+    val isEmpty = Transformations.map(workouts) { it.isEmpty() }
 
     private val _navigateToEditWorkoutFragment = MutableLiveData<Event<String>>()
     val navigateToEditWorkoutFragment: LiveData<Event<String>> = _navigateToEditWorkoutFragment

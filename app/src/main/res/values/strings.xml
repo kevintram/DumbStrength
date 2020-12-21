@@ -23,5 +23,6 @@
     <string name="thu">THU</string>
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
+    <string name="empty_workouts_message">WORK OUT YOU BITCH</string>
 
 </resources>
