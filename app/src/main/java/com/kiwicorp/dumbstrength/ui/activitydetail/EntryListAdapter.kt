@@ -52,8 +52,8 @@ class EntryListAdapter: ListAdapter<EntryListAdapter.Item, RecyclerView.ViewHold
         submitListJob?.cancel()
 
         submitListJob = adapterScope.launch {
-            val items: List<Item> =  if (entries != null && activity != null) {
-                addHeader(entries,activity)
+            val items: List<Item> =  if (activity != null) {
+                addHeader(entries ?: listOf(), activity)
             } else {
                 listOf()
             }
@@ -64,11 +64,7 @@ class EntryListAdapter: ListAdapter<EntryListAdapter.Item, RecyclerView.ViewHold
     }
 
     private fun addHeader(entries: List<WorkoutEntry>, activity: Activity): List<Item> {
-        if (entries.isEmpty()) return listOf()
-
-        val items = mutableListOf<Item>()
-
-        items.add(Item.HeaderItem(activity))
+        val items = mutableListOf<Item>(Item.HeaderItem(activity))
 
         for (entry in entries) {
             items.add(Item.EntryItem(entry))
