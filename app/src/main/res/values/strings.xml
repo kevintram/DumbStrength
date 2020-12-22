@@ -24,5 +24,7 @@
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
     <string name="empty_workouts_message">WORK OUT YOU BITCH</string>
+    <string name="routine">Routine</string>
+    <string name="workout">Workout</string>
 
 </resources>
