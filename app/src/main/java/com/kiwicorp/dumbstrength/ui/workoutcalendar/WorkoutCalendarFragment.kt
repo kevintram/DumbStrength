@@ -21,6 +21,7 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.Month
 import java.time.YearMonth
 import java.time.temporal.WeekFields
 import java.util.*
@@ -61,7 +62,7 @@ class WorkoutCalendarFragment : Fragment() {
 
     private fun setupCalendar() {
         val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(10)
+        val firstMonth = YearMonth.of(2020, Month.NOVEMBER)
         val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
         binding.calendarView.setup(firstMonth, currentMonth, firstDayOfWeek)
         binding.calendarView.scrollToMonth(currentMonth)
