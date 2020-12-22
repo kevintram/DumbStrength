@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -73,10 +74,16 @@ class AddEditWorkoutFragment: Fragment() {
                 }
             }
             binding.toolbar.setNavigationOnClickListener { viewModel.updateWorkoutAndClose() }
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                viewModel.updateWorkoutAndClose()
+            }
         } else {
             binding.toolbar.title = "Add Workout"
             args.routineId?.let { viewModel.loadRoutine(it) }
             binding.toolbar.setNavigationOnClickListener { viewModel.insertWorkoutAndClose() }
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                viewModel.insertWorkoutAndClose()
+            }
         }
     }
 
@@ -121,7 +128,7 @@ class AddEditWorkoutFragment: Fragment() {
         })
         viewModel.close.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()
-            findNavController().navigate(toWorkoutsFragment())
+            findNavController().navigateUp()
         })
     }
 }

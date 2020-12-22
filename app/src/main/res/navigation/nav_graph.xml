@@ -119,14 +119,6 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
-        <action
-            android:id="@+id/toWorkoutsFragment"
-            app:destination="@id/workoutsFragment"
-            app:enterAnim="@anim/fragment_close_enter"
-            app:exitAnim="@anim/fragment_close_exit"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
     </navigation>
     <fragment
         android:id="@+id/activityDetailFragment"
@@ -200,9 +192,6 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
-        <action
-            android:id="@+id/toRoutinesFragment"
-            app:destination="@id/routinesFragment" />
     </navigation>
     <fragment
         android:id="@+id/chooseRoutineFragment"
@@ -214,7 +203,8 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
-            app:popExitAnim="@anim/fragment_close_exit" />
+            app:popExitAnim="@anim/fragment_close_exit"
+            app:popUpTo="@id/workoutsFragment" />
     </fragment>
     <fragment
         android:id="@+id/workoutCalendarFragment"

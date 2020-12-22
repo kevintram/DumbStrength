@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -105,16 +106,22 @@ class AddEditRoutineFragment : Fragment() {
                 }
             }
             binding.toolbar.setNavigationOnClickListener { viewModel.updateRoutineAndClose() }
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                viewModel.updateRoutineAndClose()
+            }
         } else {
             binding.toolbar.title = "Add Routine"
             binding.toolbar.setNavigationOnClickListener { viewModel.insertRoutineAndClose() }
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                viewModel.insertRoutineAndClose()
+            }
         }
     }
 
     private fun setupNavigation() {
         viewModel.close.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()
-            findNavController().navigate(toRoutinesFragment())
+            findNavController().navigateUp()
         })
         viewModel.navigateToChooseActivityFragment.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()
