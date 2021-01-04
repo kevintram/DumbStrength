@@ -24,6 +24,9 @@ class WorkoutEntryWithActivityListAdapter(private val viewModel: AddEditWorkoutV
         fun bind(workoutEntryWithActivity: WorkoutEntryWithActivity, viewModel: AddEditWorkoutViewModel) {
             binding.entryWithActivity = workoutEntryWithActivity
             binding.viewModel = viewModel
+            binding.constraintLayout.setOnClickListener {
+                viewModel.navigateToActivityDetailFragment(workoutEntryWithActivity.activity.id)
+            }
             binding.entryDescriptionText.doOnTextChanged { text, _, _, _ ->
                 workoutEntryWithActivity.workoutEntry.description = text.toString()
             }

@@ -27,6 +27,9 @@ class RoutineEntryWithActivityListAdapter(private val viewModel: AddEditRoutineV
     class RoutineEntryWithActivityViewHolder(private val binding: ItemRoutineEntryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(routineEntryWithActivity: RoutineEntryWithActivity, viewModel: AddEditRoutineViewModel) {
             binding.entryWithActivity = routineEntryWithActivity
+            binding.constraintLayout.setOnClickListener {
+                viewModel.navigateToActivityDetailFragment(routineEntryWithActivity.activity.id)
+            }
             binding.entryDescriptionText.doOnTextChanged { text, _, _, _ ->
                 routineEntryWithActivity.routineEntry.description = text.toString()
             }

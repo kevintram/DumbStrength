@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.dumbstrength.EventObserver
 import com.kiwicorp.dumbstrength.R
 import com.kiwicorp.dumbstrength.databinding.FragmentAddEditRoutineBinding
+import com.kiwicorp.dumbstrength.ui.addeditroutine.AddEditRoutineFragmentDirections.Companion.toActivityDetailFragment
 import com.kiwicorp.dumbstrength.ui.addeditroutine.AddEditRoutineFragmentDirections.Companion.toChooseActivityFragment
 import com.kiwicorp.dumbstrength.ui.addeditroutine.AddEditRoutineFragmentDirections.Companion.toRoutinesFragment
 import com.kiwicorp.dumbstrength.util.Mode
@@ -122,6 +123,10 @@ class AddEditRoutineFragment : Fragment() {
         viewModel.close.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()
             findNavController().navigateUp()
+        })
+        viewModel.navigateToActivityDetailFragment.observe(viewLifecycleOwner, EventObserver {
+            closeKeyboard()
+            findNavController().navigate(toActivityDetailFragment(it))
         })
         viewModel.navigateToChooseActivityFragment.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()

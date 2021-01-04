@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kiwicorp.dumbstrength.Event
 import com.kiwicorp.dumbstrength.data.*
+import com.kiwicorp.dumbstrength.data.source.ActivityRepository
 import com.kiwicorp.dumbstrength.data.source.RoutineRepository
 import com.kiwicorp.dumbstrength.data.source.WorkoutRepository
 import com.kiwicorp.dumbstrength.ui.chooseactivitycommon.ChooseActivityListAdapter
@@ -16,7 +17,8 @@ import java.util.*
 
 class AddEditWorkoutViewModel @ViewModelInject constructor(
     private val workoutRepository: WorkoutRepository,
-    private val routineRepository: RoutineRepository
+    private val routineRepository: RoutineRepository,
+    private val activityRepository: ActivityRepository
 ): ViewModel(), ChooseActivityListAdapter.ChooseActivityActions {
     //initialize workout id here it can be used for entries
     private var workoutId = UUID.randomUUID().toString()
@@ -29,6 +31,9 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
 
     private val _navigateToChooseActivityFragment = MutableLiveData<Event<Unit>>()
     val navigateToChooseActivityFragment: LiveData<Event<Unit>> = _navigateToChooseActivityFragment
+
+    private val _navigateToActivityDetailFragment = MutableLiveData<Event<String>>()
+    val navigateToActivityDetailFragment: LiveData<Event<String>> = _navigateToActivityDetailFragment
 
     private val _close = MutableLiveData<Event<Unit>>()
     val close: LiveData<Event<Unit>> = _close
@@ -72,8 +77,13 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
             val workout = Workout(date.value!!,workoutId)
             workoutRepository.insertWorkout(workout)
 
+            val activities = activityRepository.getActivities()
+
             for (entryWithActivity in entries.value!!) {
-                workoutRepository.insertEntry(entryWithActivity.workoutEntry)
+                //in case an activity was deleted while editing a workout
+                if (activities.contains(entryWithActivity.activity)) {
+                    workoutRepository.insertEntry(entryWithActivity.workoutEntry)
+                }
             }
 
             close()
@@ -110,10 +120,16 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
                 workoutRepository.deleteEntry(entry)
             }
 
+            //in case an activity was deleted while editing a workout
+            val activities = activityRepository.getActivities()
+
             for (entryWithActivity in entries.value!!) {
-                // don't use update, use insert because onConflict = Replace. So if already exists
-                // will be updated; if doesn't exist will be inserted.
-                workoutRepository.insertEntry(entryWithActivity.workoutEntry)
+
+                if (activities.contains(entryWithActivity.activity)) {
+                    // don't use update, use insert because onConflict = Replace. So if already exists
+                    // will be updated; if doesn't exist will be inserted.
+                    workoutRepository.insertEntry(entryWithActivity.workoutEntry)
+                }
             }
 
             close()
@@ -162,6 +178,10 @@ class AddEditWorkoutViewModel @ViewModelInject constructor(
 
     fun navigateToChooseActivityFragment() {
         _navigateToChooseActivityFragment.value = Event(Unit)
+    }
+
+    fun navigateToActivityDetailFragment(activityId: String) {
+        _navigateToActivityDetailFragment.value = Event(activityId)
     }
 
     fun close() {

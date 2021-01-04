@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kiwicorp.dumbstrength.EventObserver
 import com.kiwicorp.dumbstrength.R
 import com.kiwicorp.dumbstrength.databinding.FragmentAddEditWorkoutBinding
+import com.kiwicorp.dumbstrength.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toActivityDetailFragment
 import com.kiwicorp.dumbstrength.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toChooseActivityFragment
 import com.kiwicorp.dumbstrength.ui.addeditworkout.AddEditWorkoutFragmentDirections.Companion.toWorkoutsFragment
 import com.kiwicorp.dumbstrength.util.Mode
@@ -125,6 +126,10 @@ class AddEditWorkoutFragment: Fragment() {
         viewModel.navigateToChooseActivityFragment.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()
             findNavController().navigate(toChooseActivityFragment())
+        })
+        viewModel.navigateToActivityDetailFragment.observe(viewLifecycleOwner, EventObserver {
+            closeKeyboard()
+            findNavController().navigate(toActivityDetailFragment(it))
         })
         viewModel.close.observe(viewLifecycleOwner, EventObserver {
             closeKeyboard()
