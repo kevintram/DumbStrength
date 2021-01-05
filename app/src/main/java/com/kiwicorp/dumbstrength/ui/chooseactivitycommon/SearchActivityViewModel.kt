@@ -37,9 +37,7 @@ class SearchActivityViewModel @ViewModelInject constructor(
         searchJob?.cancel()
 
         searchJob = viewModelScope.launch {
-            // The user could be typing rapidly. Giving the search job a slight delay and cancelling
-            // it on each call to this method effectively debounces.
-            delay(500)
+            delay(100)
             activities.value = activityRepository.getSearchActivities(searchQuery)
         }
     }
